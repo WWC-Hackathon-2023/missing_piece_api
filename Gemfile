@@ -2,6 +2,9 @@ source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.1"
+gem 'jsonapi-serializer'
+# gem 'faraday' #used when consuming external API
+# gem 'figaro' #used when consuming external API, to hide your api key
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8"
@@ -38,11 +41,21 @@ gem "bootsnap", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'capybara' #used to write tests
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'factory_bot_rails' #used to make fake data
+  gem 'faker' #used to make fake data
+  gem 'pry' #REPL to debug code
+  gem 'rspec-rails' #rspec tests 
+  gem 'shoulda-matchers' #used for model associations
+  gem 'simplecov' #used to show test coverage
+  # gem 'vcr' #used when consuming external API
+  # gem 'webmock' #used when consuming external API
 end
 
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  gem "rubocop-rails", require: false #used to lint code
 end
 

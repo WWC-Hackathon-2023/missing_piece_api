@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_15_214615) do
     t.bigint "owner_id", null: false
     t.bigint "borrower_id", null: false
     t.bigint "puzzle_id", null: false
-    t.integer "status", default: 1
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["borrower_id"], name: "index_loans_on_borrower_id"
@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_15_214615) do
 
   create_table "puzzles", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.integer "status", default: 1
+    t.integer "status", default: 0
     t.string "title"
     t.string "description"
     t.integer "total_pieces"

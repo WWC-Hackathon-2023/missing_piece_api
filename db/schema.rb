@@ -15,15 +15,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_15_214615) do
   enable_extension "plpgsql"
 
   create_table "loans", force: :cascade do |t|
-    t.bigint "owner_id_id", null: false
-    t.bigint "borrower_id_id", null: false
-    t.bigint "puzzle_id_id", null: false
+    t.bigint "owner_id", null: false
+    t.bigint "borrower_id", null: false
+    t.bigint "puzzle_id", null: false
     t.integer "status", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["borrower_id_id"], name: "index_loans_on_borrower_id_id"
-    t.index ["owner_id_id"], name: "index_loans_on_owner_id_id"
-    t.index ["puzzle_id_id"], name: "index_loans_on_puzzle_id_id"
+    t.index ["borrower_id"], name: "index_loans_on_borrower_id"
+    t.index ["owner_id"], name: "index_loans_on_owner_id"
+    t.index ["puzzle_id"], name: "index_loans_on_puzzle_id"
   end
 
   create_table "puzzles", force: :cascade do |t|
@@ -50,8 +50,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_15_214615) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "loans", "puzzles", column: "puzzle_id_id"
-  add_foreign_key "loans", "users", column: "borrower_id_id"
-  add_foreign_key "loans", "users", column: "owner_id_id"
+  add_foreign_key "loans", "puzzles"
+  add_foreign_key "loans", "users", column: "borrower_id"
+  add_foreign_key "loans", "users", column: "owner_id"
   add_foreign_key "puzzles", "users"
 end

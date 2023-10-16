@@ -6,4 +6,8 @@ RSpec.describe Loan, type: :model do
     it { should belong_to :borrower }
     it { should belong_to :puzzle }
   end
+
+  describe "validations" do
+    it { should define_enum_for(:status).with_values(["Pending", "Accepted", "Denied", "Closed"]) }
+  end
 end

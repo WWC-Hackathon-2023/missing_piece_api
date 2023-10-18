@@ -1,5 +1,7 @@
 class PuzzlesController < ApplicationController
+
   def index
-    head :ok
+      @puzzles = Puzzle.all
   end
+
 end

@@ -3,4 +3,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  namespace :api do
+    namespace :v1 do
+      # resources :users, only: [:show] #for ease of understanding, we will skip resoruces for now
+      get '/users/:id', to: 'users#show'
+
+    end
+  end
 end

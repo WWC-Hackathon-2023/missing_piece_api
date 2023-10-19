@@ -2,12 +2,14 @@ require 'rails_helper'
 
 RSpec.describe 'UsersController' do
   describe '#show' do
-    describe "happy path tests" do
+    context "when successful" do
       it 'returns a single user & their attributes' do
-        user_1 = create(:user, id:1)
+        user_1 = create(:user, id: 1)
 
         get "/api/v1/users/#{user_1.id}"
 
+        # these two expect statements have the same function so only one is needed:
+        # expect(response).to be_successful 
         expect(response).to have_http_status(200)
 
         parsed_data = JSON.parse(response.body, symbolize_names: true)
@@ -27,7 +29,26 @@ RSpec.describe 'UsersController' do
       end
     end
 
-    # describe "sad path tests" do
-    # end
+    context "when NOT successful" do
+      it 'returns an error message when user_id is invalid' do
+        user_1 = create(:user, id:1)
+
+        get "/api/v1/users/007"
+
+        # these two expect statements have the same function so only one is needed:
+        # expect(response).to_not be_successful 
+        expect(response).to have_http_status(404)
+
+        parsed_error_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(parsed_error_data).to be_a(Hash)
+        expect(parsed_error_data.keys).to eq([:errors])
+        expect(parsed_error_data[:errors]).to be_an(Array)
+        expect(parsed_error_data[:errors][0].keys).to eq([:status, :title, :detail])
+        expect(parsed_error_data[:errors][0][:status]).to eq("404")
+        expect(parsed_error_data[:errors][0][:title]).to eq("ActiveRecord::RecordNotFound")
+        expect(parsed_error_data[:errors][0][:detail]).to eq("Couldn't find User with 'id'=007")
+      end
+    end
   end
 end

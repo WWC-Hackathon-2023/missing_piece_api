@@ -5,5 +5,5 @@ class Loan < ApplicationRecord
 
   validates_presence_of :owner_id, :borrower_id, :puzzle_id, :status
 
-  enum status: { 'Pending' => 0, 'Accepted' => 1, 'Denied' => 2, 'Closed' => 3 }
+  enum status: { 'Pending' => 0, 'Accepted' => 1, 'Cancelled' => 2, 'Closed' => 3 }
 end

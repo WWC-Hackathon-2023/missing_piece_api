@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "PuzzlesController", type: :request do
-  describe "#ndex" do
+  describe "#index" do
     context 'when successful' do
       it "returns all puzzles from a zipcode" do
         zip_code = 12345
@@ -50,14 +50,12 @@ RSpec.describe "PuzzlesController", type: :request do
         expect(parsed_data[:data][2][:attributes][:total_pieces]).to eq(puzzle_3.total_pieces)
         expect(parsed_data[:data][2][:attributes][:notes]).to eq(puzzle_3.notes)
         expect(parsed_data[:data][2][:attributes][:puzzle_image_url]).to eq(puzzle_3.puzzle_image_url)
-
-
+      end
     end
-  end
   
-  context 'when NOT successful' do
-    it 'returns an error message when zipcode is not found' do
-      zip_code = 12345
+    context 'when NOT successful' do
+      it 'returns an error message when zipcode is not found' do
+        zip_code = 12345
         user_1 = create(:user, id: 1, zip_code: 54321)
         user_2 = create(:user, id: 2, zip_code: 12346)
         puzzle_1 = create(:puzzle, user: user_1)
@@ -77,8 +75,7 @@ RSpec.describe "PuzzlesController", type: :request do
         expect(parsed_error_data).to be_a(Hash)
         expect(parsed_error_data.keys).to eq([:error])
         expect(parsed_error_data[:error]).to eq("Puzzles not found in this area")
+      end
     end
-    
-   end
   end
 end

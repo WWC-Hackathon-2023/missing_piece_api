@@ -145,7 +145,6 @@ RSpec.describe 'User/PuzzlesController' do
 
     context "when successful" do
       it 'updates a single puzzles attributes' do
-
         puzzle_update = {
           status: 1, #FE will send us an enum digit
           title: "Winter Scene",
@@ -156,7 +155,7 @@ RSpec.describe 'User/PuzzlesController' do
         }
 
         headers = { 'CONTENT_TYPE' => 'application/json' }
-        patch "/api/v1/users/#{@user_1.id}/puzzles/#{@puzzle_2.id}", headers:, params: JSON.generate(puzzle_update)
+        patch "/api/v1/users/#{@user_1.id}/puzzles/#{@puzzle_2.id}", headers: headers, params: JSON.generate(puzzle_update)
 
         expect(response).to have_http_status(200)
 

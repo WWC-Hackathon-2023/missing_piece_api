@@ -6,9 +6,15 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       # resources :users, only: [:show] #for ease of understanding, we will skip resoruces for now
+<<<<<<< HEAD
       get 'puzzles', to: 'puzzles#index'
       get '/users/:user_id/puzzles/:puzzle_id', to: 'users/puzzles#show'
+=======
+>>>>>>> 49ab3114a5b0246e3d8308ca61eb0cca1b7ccb3b
       get '/users/:user_id', to: 'users#show'
+
+      get '/users/:user_id/puzzles', to: 'users/puzzles#index'
+      get '/users/:user_id/puzzles/:puzzle_id', to: 'users/puzzles#show'
     end
   end
 end

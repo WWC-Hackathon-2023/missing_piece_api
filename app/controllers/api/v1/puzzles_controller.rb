@@ -2,13 +2,14 @@ class Api::V1::PuzzlesController < ApplicationController
 
   def index
       
-      zipcode = params[:zip_code]
+      zip_code = params[:zip_code]
 
-      user = User.find_by(zip_code: zipcode)
+      @users = User.where(zip_code: zip_code) if zip_code.present?
 
-      if user
-        puzzles = user.puzzles.to_a
-        render json: puzzles
+      if @users.present?
+
+        @puzzles = Puzzle.where(user_id: @users.pluck(:id))
+        render json: @puzzles
       else
         puzzles = []
         render json: { error: "Puzzles not found in this area" }, status: :not_found

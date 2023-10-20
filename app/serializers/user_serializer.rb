@@ -1,6 +1,10 @@
-class UsersSerializer
+class UserSerializer
   include JSONAPI::Serializer
-  attributes :full_name, :email, :zip_code, :phone_number, :user_image_url
+  attributes :full_name, 
+             :email, 
+             :zip_code, 
+             :phone_number, 
+             :user_image_url
 
   # NOTE: I think we can add the other attributes to the user without having to create a different serializer
   # when calling on a different controller action: like an unrestful route called "dashboard" possibly

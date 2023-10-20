@@ -8,8 +8,6 @@ RSpec.describe 'UsersController' do
 
         get "/api/v1/users/#{user_1.id}"
 
-        # these two expect statements have the same function so only one is needed:
-        # expect(response).to be_successful 
         expect(response).to have_http_status(200)
 
         parsed_data = JSON.parse(response.body, symbolize_names: true)
@@ -34,9 +32,7 @@ RSpec.describe 'UsersController' do
         user_1 = create(:user, id:1)
 
         get "/api/v1/users/007"
-
-        # these two expect statements have the same function so only one is needed:
-        # expect(response).to_not be_successful 
+ 
         expect(response).to have_http_status(404)
 
         parsed_error_data = JSON.parse(response.body, symbolize_names: true)

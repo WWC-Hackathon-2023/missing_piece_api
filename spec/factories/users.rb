@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
     full_name { Faker::Name.name }
-    email { Faker::Internet.safe_email }
+    email { Faker::Internet.email }
      #we are using US zip codes for MVP: only 5 digits
     zip_code { Faker::Number.number(digits: 5) }
      #We are using US examples for the MVP: this will need to change for international usage

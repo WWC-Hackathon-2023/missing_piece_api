@@ -3,7 +3,7 @@ class Api::V1::PuzzlesController < ApplicationController
   def index
       
       zipcode = params[:zip_code]
-      
+
       user = User.find_by(zip_code: zipcode)
 
       if user

@@ -29,7 +29,7 @@ RSpec.describe 'User/PuzzlesController' do
         expect(parsed_data[:data][0][:attributes].keys).to eq([:user_id, :status, :title, :description, :total_pieces, :notes, :puzzle_image_url])
         expect(parsed_data[:data][0][:attributes][:user_id]).to eq(@puzzle_1.user_id)
         expect(parsed_data[:data][0][:attributes][:status]).to eq(@puzzle_1.status)
-        expect(parsed_data[:data][0][:attributes][:title]).to eq(@puzzle_1.title) 
+        expect(parsed_data[:data][0][:attributes][:title]).to eq(@puzzle_1.title)
         expect(parsed_data[:data][0][:attributes][:description]).to eq(@puzzle_1.description)
         expect(parsed_data[:data][0][:attributes][:total_pieces]).to eq(@puzzle_1.total_pieces)
         expect(parsed_data[:data][0][:attributes][:notes]).to eq(@puzzle_1.notes)
@@ -78,7 +78,7 @@ RSpec.describe 'User/PuzzlesController' do
         expect(parsed_data[:data][:attributes].keys).to eq([:user_id, :status, :title, :description, :total_pieces, :notes, :puzzle_image_url])
         expect(parsed_data[:data][:attributes][:user_id]).to eq(puzzle_1.user_id)
         expect(parsed_data[:data][:attributes][:status]).to eq(puzzle_1.status)
-        expect(parsed_data[:data][:attributes][:title]).to eq(puzzle_1.title) 
+        expect(parsed_data[:data][:attributes][:title]).to eq(puzzle_1.title)
         expect(parsed_data[:data][:attributes][:description]).to eq(puzzle_1.description)
         expect(parsed_data[:data][:attributes][:total_pieces]).to eq(puzzle_1.total_pieces)
         expect(parsed_data[:data][:attributes][:notes]).to eq(puzzle_1.notes)
@@ -146,16 +146,16 @@ RSpec.describe 'User/PuzzlesController' do
     context "when successful" do
       it 'updates a single puzzles attributes' do
         puzzle_update = {
-          status: 1, #FE will send us an enum digit
+          status: 1, # FE will send us an enum digit
           title: "Winter Scene",
           description: "Log Cabin and Bear",
-          total_pieces: 100, 
+          total_pieces: 100,
           notes: "This puzzle wasn't too difficult. It's fun to do with the whole family!",
           puzzle_image_url: "/aws/s3/bucket/for_you.com"
         }
 
         headers = { 'CONTENT_TYPE' => 'application/json' }
-        patch "/api/v1/users/#{@user_1.id}/puzzles/#{@puzzle_2.id}", headers: headers, params: JSON.generate(puzzle_update)
+        patch "/api/v1/users/#{@user_1.id}/puzzles/#{@puzzle_2.id}", headers:, params: JSON.generate(puzzle_update)
 
         expect(response).to have_http_status(200)
 
@@ -169,15 +169,15 @@ RSpec.describe 'User/PuzzlesController' do
         expect(parsed_data[:data][:attributes]).to be_a(Hash)
         expect(parsed_data[:data][:attributes].keys).to eq([:user_id, :status, :title, :description, :total_pieces, :notes, :puzzle_image_url])
         expect(parsed_data[:data][:attributes][:user_id]).to eq(@puzzle_2.user_id)
-        expect(parsed_data[:data][:attributes][:status]).to eq("Pending") #enums digit is transformed into string
-        expect(parsed_data[:data][:attributes][:title]).to eq("Winter Scene") 
+        expect(parsed_data[:data][:attributes][:status]).to eq("Pending") # enums digit is transformed into string
+        expect(parsed_data[:data][:attributes][:title]).to eq("Winter Scene")
         expect(parsed_data[:data][:attributes][:description]).to eq("Log Cabin and Bear")
         expect(parsed_data[:data][:attributes][:total_pieces]).to eq(100)
         expect(parsed_data[:data][:attributes][:notes]).to eq("This puzzle wasn't too difficult. It's fun to do with the whole family!")
         expect(parsed_data[:data][:attributes][:puzzle_image_url]).to eq("/aws/s3/bucket/for_you.com")
 
-        expect(parsed_data[:data][:attributes][:status]).to_not eq(@puzzle_2.status) #puzzle default enum status 0 = "Available"
-        expect(parsed_data[:data][:attributes][:title]).to_not eq(@puzzle_2.title) 
+        expect(parsed_data[:data][:attributes][:status]).to_not eq(@puzzle_2.status) # puzzle default enum status 0 = "Available"
+        expect(parsed_data[:data][:attributes][:title]).to_not eq(@puzzle_2.title)
         expect(parsed_data[:data][:attributes][:description]).to_not eq(@puzzle_2.description)
         expect(parsed_data[:data][:attributes][:total_pieces]).to_not eq(@puzzle_2.total_pieces)
         expect(parsed_data[:data][:attributes][:notes]).to_not eq(@puzzle_2.notes)
@@ -188,10 +188,10 @@ RSpec.describe 'User/PuzzlesController' do
     context "when NOT successful" do
       it 'returns an error message when user_id is invalid' do
         puzzle_update = {
-          status: 1, #FE will send us an enum digit
+          status: 1, # FE will send us an enum digit
           title: "Winter Scene",
           description: "Log Cabin and Bear",
-          total_pieces: 100, 
+          total_pieces: 100,
           notes: "This puzzle wasn't too difficult. It's fun to do with the whole family!",
           puzzle_image_url: "/aws/s3/bucket/for_you.com"
         }
@@ -214,10 +214,10 @@ RSpec.describe 'User/PuzzlesController' do
 
       it 'returns an error message when puzzle_id is invalid' do
         puzzle_update = {
-          status: 1, #FE will send us an enum digit
+          status: 1, # FE will send us an enum digit
           title: "Winter Scene",
           description: "Log Cabin and Bear",
-          total_pieces: 100, 
+          total_pieces: 100,
           notes: "This puzzle wasn't too difficult. It's fun to do with the whole family!",
           puzzle_image_url: "/aws/s3/bucket/for_you.com"
         }
@@ -238,7 +238,7 @@ RSpec.describe 'User/PuzzlesController' do
         expect(parsed_error_data[:errors][0][:detail]).to eq("Couldn't find Puzzle with 'id'=007")
       end
 
-      #REFACTOR: We could add a test to limit the integers allowed for for total_pieces. Ex: [260, 500, 1000, 1500, 2000, 3000] only? 
+      # REFACTOR: We could add a test to limit the integers allowed for for total_pieces. Ex: [260, 500, 1000, 1500, 2000, 3000] only?
     end
   end
 end

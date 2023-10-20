@@ -1,5 +1,4 @@
 class Api::V1::Users::PuzzlesController < ApplicationController
-
   def index
     user = User.find(params[:user_id])
     render json: PuzzleSerializer.new(user.puzzles)
@@ -20,7 +19,8 @@ class Api::V1::Users::PuzzlesController < ApplicationController
   end
 
   private
+
   def puzzle_params
-    params.permit(:status, :title, :description, :total_pieces, :notes, :puzzle_image_url) #did not include user_id
+    params.permit(:status, :title, :description, :total_pieces, :notes, :puzzle_image_url) # did not include user_id
   end
 end

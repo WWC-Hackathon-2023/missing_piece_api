@@ -131,7 +131,60 @@ RSpec.describe 'User/PuzzlesController' do
       end
     end
 
-    # context "when NOT successful" do
-    # end
+    context "when NOT successful" do
+      it 'returns an error message when user_id is invalid' do
+        puzzle_update = {
+          status: 1, #FE will send us an enum digit
+          title: "Winter Scene",
+          description: "Log Cabin and Bear",
+          total_pieces: 100, 
+          notes: "This puzzle wasn't too difficult. It's fun to do with the whole family!",
+          puzzle_image_url: "/aws/s3/bucket/for_you.com"
+        }
+
+        headers = { 'CONTENT_TYPE' => 'application/json' }
+        patch "/api/v1/users/007/puzzles/#{@puzzle_2.id}", headers:, params: JSON.generate(puzzle_update)
+
+        expect(response).to have_http_status(404)
+
+        parsed_error_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(parsed_error_data).to be_a(Hash)
+        expect(parsed_error_data.keys).to eq([:errors])
+        expect(parsed_error_data[:errors]).to be_an(Array)
+        expect(parsed_error_data[:errors][0].keys).to eq([:status, :title, :detail])
+        expect(parsed_error_data[:errors][0][:status]).to eq("404")
+        expect(parsed_error_data[:errors][0][:title]).to eq("ActiveRecord::RecordNotFound")
+        expect(parsed_error_data[:errors][0][:detail]).to eq("Couldn't find User with 'id'=007")
+      end
+
+      it 'returns an error message when puzzle_id is invalid' do
+        puzzle_update = {
+          status: 1, #FE will send us an enum digit
+          title: "Winter Scene",
+          description: "Log Cabin and Bear",
+          total_pieces: 100, 
+          notes: "This puzzle wasn't too difficult. It's fun to do with the whole family!",
+          puzzle_image_url: "/aws/s3/bucket/for_you.com"
+        }
+
+        headers = { 'CONTENT_TYPE' => 'application/json' }
+        patch "/api/v1/users/#{@user_1.id}/puzzles/007", headers:, params: JSON.generate(puzzle_update)
+
+        expect(response).to have_http_status(404)
+
+        parsed_error_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(parsed_error_data).to be_a(Hash)
+        expect(parsed_error_data.keys).to eq([:errors])
+        expect(parsed_error_data[:errors]).to be_an(Array)
+        expect(parsed_error_data[:errors][0].keys).to eq([:status, :title, :detail])
+        expect(parsed_error_data[:errors][0][:status]).to eq("404")
+        expect(parsed_error_data[:errors][0][:title]).to eq("ActiveRecord::RecordNotFound")
+        expect(parsed_error_data[:errors][0][:detail]).to eq("Couldn't find Puzzle with 'id'=007")
+      end
+
+      #REFACTOR: We could add a test to limit the integers allowed for for total_pieces. Ex: [260, 500, 1000, 1500, 2000, 3000] only? 
+    end
   end
 end

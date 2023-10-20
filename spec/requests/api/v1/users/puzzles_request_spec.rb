@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'User/PuzzlesController' do
-  describe '#index' do
+  describe '#index' do # My Collection Page
     before(:each) do
       @user_1 = create(:user, id: 1)
 
@@ -56,7 +56,7 @@ RSpec.describe 'User/PuzzlesController' do
     end
   end
 
-  describe '#show' do
+  describe '#show' do # Individual Puzzle Page
     context "when successful" do
       it 'returns a single puzzle & its attributes' do
         user_1 = create(:user, id: 1)

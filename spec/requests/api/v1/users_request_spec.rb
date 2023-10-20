@@ -109,12 +109,11 @@ RSpec.describe 'UsersController' do
         expect(parsed_data[:data][:attributes][:borrower_loans].size).to eq(2)
         expect(parsed_data[:data][:attributes][:borrower_loans][0]).to be_a(Hash)
         expect(parsed_data[:data][:attributes][:borrower_loans][0].keys).to eq([:id, :owner_id, :borrower_id, :puzzle_id, :status, :created_at, :updated_at])
-
       end
     end
 
     context "when NOT successful" do
-      xit 'returns an error message when user_id is invalid' do
+      it 'returns an error message when user_id is invalid' do
         get "/api/v1/users/007/dashboard"
  
         expect(response).to have_http_status(404)

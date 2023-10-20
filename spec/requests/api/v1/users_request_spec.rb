@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'UsersController' do
-  describe '#show' do
+  describe '#show' do #Owner/Borrower Info Page
     context "when successful" do
       it 'returns a single user & their attributes' do
         user_1 = create(:user, id: 1)

@@ -10,7 +10,9 @@ Rails.application.routes.draw do
       get '/users/:user_id', to: 'users#show'
       get '/users/:user_id/dashboard', to: 'users#dashboard'
 
+      get '/users/:user_id/puzzles', to: 'users/puzzles#index'
       get '/users/:user_id/puzzles/:puzzle_id', to: 'users/puzzles#show'
+      patch '/users/:user_id/puzzles/:puzzle_id', to: 'users/puzzles#update'
     end
   end
 end

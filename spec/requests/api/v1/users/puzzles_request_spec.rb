@@ -149,7 +149,7 @@ RSpec.describe 'User/PuzzlesController' do
           status: 1, # FE will send us an enum digit
           title: "Winter Scene",
           description: "Log Cabin and Bear",
-          total_pieces: 100,
+          total_pieces: 1000,
           notes: "This puzzle wasn't too difficult. It's fun to do with the whole family!",
           puzzle_image_url: "/aws/s3/bucket/for_you.com"
         }
@@ -240,5 +240,36 @@ RSpec.describe 'User/PuzzlesController' do
 
       # REFACTOR: We could add a test to limit the integers allowed for for total_pieces. Ex: [260, 500, 1000, 1500, 2000, 3000] only?
     end
+  end
+
+  describe '#create' do
+    before(:each) do
+      @user_1 = create(:user, id: 1)
+    end
+
+    context "when successful" do
+      it "can create a new puzzle object" do
+        new_puzzle_info = {
+          title: "Winter Scene",
+          description: "Log Cabin and Bear",
+          total_pieces: 1000,
+          notes: "This puzzle wasn't too difficult. It's fun to do with the whole family!",
+        }
+
+        image_file = fixture_file_upload('spec/fixtures/puzzle_test.jpg', 'image/jpeg')
+
+        # headers = { 'CONTENT_TYPE' => 'application/json' }
+        post "/api/v1/users/#{@user_1.id}/puzzles", params: new_puzzle_info.merge(image: image_file)
+
+        expect(response).to have_http_status(201)
+
+        parsed_data = JSON.parse(response.body, symbolize_names: true)
+
+
+      end
+    end
+
+    # context "when NOT successful" do
+    # end
   end
 end

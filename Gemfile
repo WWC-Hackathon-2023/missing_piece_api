@@ -43,6 +43,7 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   # gem 'bundler-audit'
   gem 'capybara' #used to write tests
+  gem 'cloudinary'
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'factory_bot_rails' #used to make fake data
   gem 'faker' #used to make fake data

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       # resources :users, only: [:show] #for ease of understanding, we will skip resoruces for now
-      put 'puzzles', to: 'puzzles#index'
+      put '/puzzles', to: 'puzzles#index'
 
       get '/users/:user_id', to: 'users#show'
       get '/users/:user_id/dashboard', to: 'users#dashboard'

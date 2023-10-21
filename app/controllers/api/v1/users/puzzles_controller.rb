@@ -12,20 +12,8 @@ class Api::V1::Users::PuzzlesController < ApplicationController
 
   def create
     user = User.find(params[:user_id])
-
-    # Uploads the image to Cloudinary & returns the url
-    result = Cloudinary::Uploader.upload(params[:image])
-    image_url = result['url']
-
-    # Takes strong params and adds image url
-    puzzle_attributes = puzzle_params
-    puzzle_attributes[:puzzle_image_url] = image_url
-
-    # Creates a new puzzle for the owner
-    puzzle = user.puzzles.new(puzzle_attributes)
-
-    # If the puzzle can be save in the DB we return the puzzle:
-    render json: PuzzleSerializer.new(puzzle), status: :created if puzzle.save
+    puzzle = user.puzzles.build(puzzle_params)
+    render json: PuzzleSerializer.new(puzzle), status: 201 if puzzle.save
   end
 
   def update

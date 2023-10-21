@@ -50,8 +50,6 @@ RSpec.describe 'UsersController' do
 
   describe '#dashboard' do
     before(:each) do
-      Rails.cache.clear
-
       @user_1 = create(:user, id: 1)
       @user_2 = create(:user, id: 2)
       @user_3 = create(:user, id: 3)
@@ -95,22 +93,25 @@ RSpec.describe 'UsersController' do
         expect(parsed_data[:data].keys).to eq([:id, :type, :attributes])
 
         expect(parsed_data[:data][:attributes]).to be_a(Hash)
-        expect(parsed_data[:data][:attributes].keys).to eq([:full_name, :email, :zip_code, :phone_number, :user_image_url, :owner_loans, :borrower_loans])
-        expect(parsed_data[:data][:attributes][:full_name]).to eq(@user_1.full_name)
-        expect(parsed_data[:data][:attributes][:email]).to eq(@user_1.email)
-        expect(parsed_data[:data][:attributes][:zip_code]).to eq(@user_1.zip_code)
-        expect(parsed_data[:data][:attributes][:phone_number]).to eq(@user_1.phone_number)
-        expect(parsed_data[:data][:attributes][:user_image_url]).to eq(@user_1.user_image_url)
+        expect(parsed_data[:data][:attributes].keys).to eq([:user_info, :owner_loans, :borrower_loans])
 
+        expect(parsed_data[:data][:attributes][:user_info]).to be_a(Hash)
+        expect(parsed_data[:data][:attributes][:user_info].keys).to eq([:full_name, :email, :zip_code, :phone_number, :user_image_url])
+        expect(parsed_data[:data][:attributes][:user_info][:full_name]).to eq(@user_1.full_name)
+        expect(parsed_data[:data][:attributes][:user_info][:email]).to eq(@user_1.email)
+        expect(parsed_data[:data][:attributes][:user_info][:zip_code]).to eq(@user_1.zip_code)
+        expect(parsed_data[:data][:attributes][:user_info][:phone_number]).to eq(@user_1.phone_number)
+        expect(parsed_data[:data][:attributes][:user_info][:user_image_url]).to eq(@user_1.user_image_url)
+        
         expect(parsed_data[:data][:attributes][:owner_loans]).to be_an(Array)
         expect(parsed_data[:data][:attributes][:owner_loans].size).to eq(3)
         expect(parsed_data[:data][:attributes][:owner_loans][0]).to be_a(Hash)
-        expect(parsed_data[:data][:attributes][:owner_loans][0].keys).to eq([:loan_id, :owner_id, :borrower_id, :loan_status, :loan_created_at, :puzzle_id, :puzzle_image, :puzzle_title, :puzzle_status])
+        expect(parsed_data[:data][:attributes][:owner_loans][0].keys).to eq([:loan_id, :owner_id, :borrower_id, :loan_status, :loan_created_at, :puzzle_id, :puzzle_image_url, :puzzle_title, :puzzle_status])
 
         expect(parsed_data[:data][:attributes][:borrower_loans]).to be_an(Array)
         expect(parsed_data[:data][:attributes][:borrower_loans].size).to eq(2)
         expect(parsed_data[:data][:attributes][:borrower_loans][0]).to be_a(Hash)
-        expect(parsed_data[:data][:attributes][:borrower_loans][0].keys).to eq([:loan_id, :owner_id, :borrower_id, :loan_status, :loan_created_at, :puzzle_id, :puzzle_image, :puzzle_title, :puzzle_status])
+        expect(parsed_data[:data][:attributes][:borrower_loans][0].keys).to eq([:loan_id, :owner_id, :borrower_id, :loan_status, :loan_created_at, :puzzle_id, :puzzle_image_url, :puzzle_title, :puzzle_status])
       end
     end
 

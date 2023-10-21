@@ -172,7 +172,7 @@ RSpec.describe 'User/PuzzlesController' do
         expect(parsed_data[:data][:attributes][:status]).to eq("Pending") # enums digit is transformed into string
         expect(parsed_data[:data][:attributes][:title]).to eq("Winter Scene")
         expect(parsed_data[:data][:attributes][:description]).to eq("Log Cabin and Bear")
-        expect(parsed_data[:data][:attributes][:total_pieces]).to eq(100)
+        expect(parsed_data[:data][:attributes][:total_pieces]).to eq(1000)
         expect(parsed_data[:data][:attributes][:notes]).to eq("This puzzle wasn't too difficult. It's fun to do with the whole family!")
         expect(parsed_data[:data][:attributes][:puzzle_image_url]).to eq("/aws/s3/bucket/for_you.com")
 
@@ -254,18 +254,30 @@ RSpec.describe 'User/PuzzlesController' do
           description: "Log Cabin and Bear",
           total_pieces: 1000,
           notes: "This puzzle wasn't too difficult. It's fun to do with the whole family!",
+          puzzle_image_url: "http://res.cloudinary.com/dwcorjdyo/image/upload/v1697926076/y6gkdqbwsh44wrw6iakc.jpg"
         }
 
-        image_file = fixture_file_upload('spec/fixtures/puzzle_test.jpg', 'image/jpeg')
-
-        # headers = { 'CONTENT_TYPE' => 'application/json' }
-        post "/api/v1/users/#{@user_1.id}/puzzles", params: new_puzzle_info.merge(image: image_file)
+        headers = { 'CONTENT_TYPE' => 'application/json' }
+        post "/api/v1/users/#{@user_1.id}/puzzles", headers:, params: JSON.generate(new_puzzle_info)
 
         expect(response).to have_http_status(201)
 
         parsed_data = JSON.parse(response.body, symbolize_names: true)
 
+        expect(parsed_data).to be_a(Hash)
+        expect(parsed_data.keys).to eq([:data])
+        expect(parsed_data[:data]).to be_a(Hash)
+        expect(parsed_data[:data].keys).to eq([:id, :type, :attributes])
 
+        expect(parsed_data[:data][:attributes]).to be_a(Hash)
+        expect(parsed_data[:data][:attributes].keys).to eq([:user_id, :status, :title, :description, :total_pieces, :notes, :puzzle_image_url])
+        expect(parsed_data[:data][:attributes][:user_id]).to eq(@user_1.id)
+        expect(parsed_data[:data][:attributes][:status]).to eq("Available") # enums digit is transformed into string
+        expect(parsed_data[:data][:attributes][:title]).to eq("Winter Scene")
+        expect(parsed_data[:data][:attributes][:description]).to eq("Log Cabin and Bear")
+        expect(parsed_data[:data][:attributes][:total_pieces]).to eq(1000)
+        expect(parsed_data[:data][:attributes][:notes]).to eq("This puzzle wasn't too difficult. It's fun to do with the whole family!")
+        expect(parsed_data[:data][:attributes][:puzzle_image_url]).to eq("http://res.cloudinary.com/dwcorjdyo/image/upload/v1697926076/y6gkdqbwsh44wrw6iakc.jpg")
       end
     end
 

@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'pry'
 RSpec.describe 'UsersController' do
-  describe '#show' do #Owner/Borrower Info Page
+  describe '#show' do # Owner/Borrower Info Page
     context "when successful" do
       it 'returns a single user & their attributes' do
         user_1 = create(:user, id: 1)
@@ -21,7 +21,7 @@ RSpec.describe 'UsersController' do
         expect(parsed_data[:data][:attributes].keys).to eq([:full_name, :email, :zip_code, :phone_number, :user_image_url])
         expect(parsed_data[:data][:attributes][:full_name]).to eq(user_1.full_name)
         expect(parsed_data[:data][:attributes][:email]).to eq(user_1.email)
-        expect(parsed_data[:data][:attributes][:zip_code]).to eq(user_1.zip_code) 
+        expect(parsed_data[:data][:attributes][:zip_code]).to eq(user_1.zip_code)
         expect(parsed_data[:data][:attributes][:phone_number]).to eq(user_1.phone_number)
         expect(parsed_data[:data][:attributes][:user_image_url]).to eq(user_1.user_image_url)
       end
@@ -29,10 +29,10 @@ RSpec.describe 'UsersController' do
 
     context "when NOT successful" do
       it 'returns an error message when user_id is invalid' do
-        user_1 = create(:user, id:1)
+        user_1 = create(:user, id: 1)
 
         get "/api/v1/users/007"
- 
+
         expect(response).to have_http_status(404)
 
         parsed_error_data = JSON.parse(response.body, symbolize_names: true)
@@ -55,15 +55,15 @@ RSpec.describe 'UsersController' do
       @user_3 = create(:user, id: 3)
       @user_4 = create(:user, id: 4)
 
-      5.times do 
+      5.times do
         create(:puzzle, user: @user_1)
       end
 
-      4.times do 
+      4.times do
         create(:puzzle, user: @user_2)
       end
 
-      3.times do 
+      3.times do
         create(:puzzle, user: @user_3)
       end
 
@@ -96,7 +96,7 @@ RSpec.describe 'UsersController' do
         expect(parsed_data[:data][:attributes].keys).to eq([:full_name, :email, :zip_code, :phone_number, :user_image_url, :owner_loans, :borrower_loans])
         expect(parsed_data[:data][:attributes][:full_name]).to eq(@user_1.full_name)
         expect(parsed_data[:data][:attributes][:email]).to eq(@user_1.email)
-        expect(parsed_data[:data][:attributes][:zip_code]).to eq(@user_1.zip_code) 
+        expect(parsed_data[:data][:attributes][:zip_code]).to eq(@user_1.zip_code)
         expect(parsed_data[:data][:attributes][:phone_number]).to eq(@user_1.phone_number)
         expect(parsed_data[:data][:attributes][:user_image_url]).to eq(@user_1.user_image_url)
 
@@ -115,7 +115,7 @@ RSpec.describe 'UsersController' do
     context "when NOT successful" do
       it 'returns an error message when user_id is invalid' do
         get "/api/v1/users/007/dashboard"
- 
+
         expect(response).to have_http_status(404)
 
         parsed_error_data = JSON.parse(response.body, symbolize_names: true)

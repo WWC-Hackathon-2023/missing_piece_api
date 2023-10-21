@@ -25,4 +25,3 @@ class Api::V1::UsersController < ApplicationController
     params.require(:user).permit(:full_name, :email, :zip_code, :phone_number, :user_image_url)
   end
 end
-

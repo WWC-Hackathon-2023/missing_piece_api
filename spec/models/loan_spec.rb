@@ -13,6 +13,6 @@ RSpec.describe Loan, type: :model do
     it { should validate_presence_of :puzzle_id }
     it { should validate_presence_of :status }
 
-    it { should define_enum_for(:status).with_values(["Pending", "Accepted", "Cancelled", "Closed"]) }
+    it { should define_enum_for(:status).with_values(%w[Pending Accepted Cancelled Closed]) }
   end
 end

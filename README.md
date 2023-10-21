@@ -6,7 +6,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/WWC-Hackathon-2023/missing_piece_api">
-    <img src="ADD LOGO IMAGE FILE PATH OF PROJECT HERE" alt="Logo" width="150" height="150">
+    <img src=".github/the_missing_piece_logo.png" alt="Logo" width="200" height="200">
   </a>
 
 <h3 align="center">Welcome to The Missing Piece</h3>
@@ -336,7 +336,7 @@ View these endpoints in [![Run in Postman](https://run.pstmn.io/button.svg)](Add
 <h2 id="contact">Contributors</h2>
 
 
-| [<img alt="Paola Andrea Ramirez Quintero" width="75" src=".github/Andrea.jpeg"/>](https://www.linkedin.com/in/paola-andrea-ramirez-quintero/) | [<img alt="Carmen Luna" width="75" src=".github/Carmen.jpeg"/>](https://www.linkedin.com/in/carmen-luna-cllp/) | [<img alt="Natalia Torrejon" width="75" src=".github/Nati.jpeg"/>](https://www.linkedin.com/in/natalia-torrejon-developer/) | [<img alt="Kemi Thomas" width="75" src=".github/Kemi.jpeg"/>](https://www.linkedin.com/in/kemi-thomas/) | [<img alt="Bisrat Melak" width="75" src=".github/Bisrat.jpeg"/>](https://www.linkedin.com/in/bisrat-melak/) | [<img alt="Melony Erin Franchini" width="75" src=".github/Melony.jpg"/>](https://www.linkedin.com/in/melony-erin-franchini/) |
+| [<img alt="Paola Andrea Ramirez Quintero" width="75" src=".github/Andrea.jpeg"/>](https://www.linkedin.com/in/paola-andrea-ramirez-quintero/) | [<img alt="Carmen Luna" width="75" src=".github/Carmen.jpg"/>](https://www.linkedin.com/in/carmen-luna-cllp/) | [<img alt="Natalia Torrejon" width="75" src=".github/Nati.jpeg"/>](https://www.linkedin.com/in/natalia-torrejon-developer/) | [<img alt="Kemi Thomas" width="75" src=".github/Kemi.jpeg"/>](https://www.linkedin.com/in/kemi-thomas/) | [<img alt="Bisrat Melak" width="75" src=".github/Bisrat.jpeg"/>](https://www.linkedin.com/in/bisrat-melak/) | [<img alt="Melony Erin Franchini" width="75" src=".github/Melony.jpg"/>](https://www.linkedin.com/in/melony-erin-franchini/) |
 | ------------------ | ------------ | -------------- | ----------- | -------------- | ----------- |
 | Andrea Ramirez | Carmen Luna | Natalia Torrejon | Kemi Thomas | Bisrat Melak | Melony Erin Franchini |
 | FrontEnd | FrontEnd | FrontEnd | FullStack | BackEnd | BackEnd & Team Lead |

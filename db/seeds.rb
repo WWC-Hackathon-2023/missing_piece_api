@@ -5,13 +5,13 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-require = 'faker'
+require 'faker'
 
 # Create users
 10.times do
   User.create(
     full_name: Faker::Name.name,
-    password_digest: BCrypt::Password.create('password'), # You may want to set a secure password here
+    # password_digest: BCrypt::Password.create('password'), # You may want to set a secure password here
     email: Faker::Internet.email,
     zip_code: Faker::Address.zip_code,
     phone_number: Faker::PhoneNumber.phone_number,

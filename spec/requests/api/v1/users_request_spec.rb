@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+require 'pry'
 RSpec.describe 'UsersController' do
   describe '#show' do #Owner/Borrower Info Page
     context "when successful" do
@@ -127,6 +127,37 @@ RSpec.describe 'UsersController' do
         expect(parsed_error_data[:errors][0][:status]).to eq("404")
         expect(parsed_error_data[:errors][0][:title]).to eq("ActiveRecord::RecordNotFound")
         expect(parsed_error_data[:errors][0][:detail]).to eq("Couldn't find User with 'id'=007")
+      end
+    end
+  end
+
+  describe '#create' do
+    context "when there is valid params and it's successful" do
+      it 'creates a new user' do
+
+        user_params = {
+          full_name: "Diana Puzzler",
+          email: "D.Puzzle@gmail.com",
+          zip_code: 12345, 
+          phone_number: "(505)123-0000",
+          user_image_url: "/aws/s3bucket/image_number1234/mary_prfile_pic.url",
+        }
+
+        post "/api/v1/users", params: { user: user_params }
+
+        expect(response).to have_http_status(200)
+  
+        parsed_data = JSON.parse(response.body, symbolize_names: true)
+        # binding.pry
+        expect(parsed_data).to be_a(Hash)
+        # expect(parsed_data.keys).to eq([:data])
+        expect(parsed_data[:data]).to be_a(Hash)
+        expect(parsed_data[:data].keys).to eq([:id, :type, :attributes])
+  
+        expect(parsed_data[:data][:attributes]).to be_a(Hash)
+        expect(parsed_data[:data][:attributes].keys).to eq([:data])
+        
+        expect(User.count).to eq(1)
       end
     end
   end

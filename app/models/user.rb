@@ -11,8 +11,8 @@ class User < ApplicationRecord
 
   # This method needs a HUGE refactor:
   def find_dashboard_info
-    owner_loans_with_puzzle = owner_loans.includes(:puzzle)
-    borrower_loans_with_puzzle = borrower_loans.includes(:puzzle)
+    owner_loans_with_puzzle = owner_loans.includes(:puzzle).where(status: [0, 1])
+    borrower_loans_with_puzzle = borrower_loans.includes(:puzzle).where(status: [0, 1])
 
     dashboard_info = {
       id: id,

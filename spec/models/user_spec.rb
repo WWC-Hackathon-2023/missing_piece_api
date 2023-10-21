@@ -46,7 +46,9 @@ RSpec.describe User, type: :model do
         @loan_3 = create(:loan, owner: @user_1, borrower: @user_4)
   
         @loan_4 = create(:loan, owner: @user_2, borrower: @user_1)
-        @loan_5 = create(:loan, owner: @user_3, borrower: @user_1)
+        @loan_5 = create(:loan, owner: @user_2, borrower: @user_1)
+        @loan_6 = create(:loan, owner: @user_3, borrower: @user_1, status: 2)
+        @loan_7 = create(:loan, owner: @user_4, borrower: @user_1, status: 3)
       end
       
       it "returns a Dashboard object with user_info, owner_loans, and borrower_loans" do
@@ -67,7 +69,8 @@ RSpec.describe User, type: :model do
         expect(dashboard_info.owner_loans).to be_an(Array)
         expect(dashboard_info.owner_loans.size).to eq(3)
         expect(dashboard_info.borrower_loans).to be_an(Array)
-        expect(dashboard_info.borrower_loans.size).to eq(2)
+        expect(dashboard_info.borrower_loans.size).to eq(2) # this also proves that loans with status 2 or 3 are not included
+        # REFACTOR: need to add more specific tests
       end
     end
   end

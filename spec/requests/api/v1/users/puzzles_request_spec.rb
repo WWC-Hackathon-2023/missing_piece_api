@@ -149,7 +149,7 @@ RSpec.describe 'User/PuzzlesController' do
           status: 1, # FE will send us an enum digit
           title: "Winter Scene",
           description: "Log Cabin and Bear",
-          total_pieces: 1000,
+          total_pieces: 100,
           notes: "This puzzle wasn't too difficult. It's fun to do with the whole family!",
           puzzle_image_url: "/aws/s3/bucket/for_you.com"
         }
@@ -172,7 +172,7 @@ RSpec.describe 'User/PuzzlesController' do
         expect(parsed_data[:data][:attributes][:status]).to eq("Pending") # enums digit is transformed into string
         expect(parsed_data[:data][:attributes][:title]).to eq("Winter Scene")
         expect(parsed_data[:data][:attributes][:description]).to eq("Log Cabin and Bear")
-        expect(parsed_data[:data][:attributes][:total_pieces]).to eq(1000)
+        expect(parsed_data[:data][:attributes][:total_pieces]).to eq(100)
         expect(parsed_data[:data][:attributes][:notes]).to eq("This puzzle wasn't too difficult. It's fun to do with the whole family!")
         expect(parsed_data[:data][:attributes][:puzzle_image_url]).to eq("/aws/s3/bucket/for_you.com")
 

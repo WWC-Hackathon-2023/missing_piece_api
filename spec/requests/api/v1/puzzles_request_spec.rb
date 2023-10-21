@@ -12,9 +12,9 @@ RSpec.describe "PuzzlesController", type: :request do
         user_2 = create(:user, id: 2, zip_code:)
         user_3 = create(:user, id: 3, zip_code: 54_321)
         puzzle_1 = create(:puzzle, user: user_1)
-        puzzle_2 = create(:puzzle, user: user_1)
+        create(:puzzle, user: user_1)
         puzzle_3 = create(:puzzle, user: user_2)
-        puzzle_4 = create(:puzzle, user: user_3)
+        create(:puzzle, user: user_3)
 
         zipcode_params = { zip_code: 12_345 }
 
@@ -57,13 +57,12 @@ RSpec.describe "PuzzlesController", type: :request do
 
     context 'when NOT successful' do
       it 'returns an error message when zipcode is not found' do
-        zip_code = 12_345
         user_1 = create(:user, id: 1, zip_code: 54_321)
         user_2 = create(:user, id: 2, zip_code: 12_346)
-        puzzle_1 = create(:puzzle, user: user_1)
-        puzzle_2 = create(:puzzle, user: user_1)
-        puzzle_3 = create(:puzzle, user: user_2)
-        puzzle_4 = create(:puzzle, user: user_2)
+        create(:puzzle, user: user_1)
+        create(:puzzle, user: user_1)
+        create(:puzzle, user: user_2)
+        create(:puzzle, user: user_2)
 
         zipcode_params = { zip_code: 0o0000 }
 

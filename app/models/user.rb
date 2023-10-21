@@ -9,6 +9,7 @@ class User < ApplicationRecord
   validates :email, :phone_number, uniqueness: true
   validates_numericality_of :zip_code
 
+  # This method needs a HUGE refactor:
   def find_dashboard_info
     owner_loans_with_puzzle = owner_loans.includes(:puzzle)
     borrower_loans_with_puzzle = borrower_loans.includes(:puzzle)

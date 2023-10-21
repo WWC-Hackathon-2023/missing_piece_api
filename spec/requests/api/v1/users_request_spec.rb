@@ -50,6 +50,8 @@ RSpec.describe 'UsersController' do
 
   describe '#dashboard' do
     before(:each) do
+      Rails.cache.clear
+
       @user_1 = create(:user, id: 1)
       @user_2 = create(:user, id: 2)
       @user_3 = create(:user, id: 3)
@@ -103,12 +105,12 @@ RSpec.describe 'UsersController' do
         expect(parsed_data[:data][:attributes][:owner_loans]).to be_an(Array)
         expect(parsed_data[:data][:attributes][:owner_loans].size).to eq(3)
         expect(parsed_data[:data][:attributes][:owner_loans][0]).to be_a(Hash)
-        expect(parsed_data[:data][:attributes][:owner_loans][0].keys).to eq([:id, :owner_id, :borrower_id, :puzzle_id, :status, :created_at, :updated_at])
+        expect(parsed_data[:data][:attributes][:owner_loans][0].keys).to eq([:loan_id, :owner_id, :borrower_id, :loan_status, :loan_created_at, :puzzle_id, :puzzle_image, :puzzle_title, :puzzle_status])
 
         expect(parsed_data[:data][:attributes][:borrower_loans]).to be_an(Array)
         expect(parsed_data[:data][:attributes][:borrower_loans].size).to eq(2)
         expect(parsed_data[:data][:attributes][:borrower_loans][0]).to be_a(Hash)
-        expect(parsed_data[:data][:attributes][:borrower_loans][0].keys).to eq([:id, :owner_id, :borrower_id, :puzzle_id, :status, :created_at, :updated_at])
+        expect(parsed_data[:data][:attributes][:borrower_loans][0].keys).to eq([:loan_id, :owner_id, :borrower_id, :loan_status, :loan_created_at, :puzzle_id, :puzzle_image, :puzzle_title, :puzzle_status])
       end
     end
 

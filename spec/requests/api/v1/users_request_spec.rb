@@ -29,7 +29,7 @@ RSpec.describe 'UsersController' do
 
     context "when NOT successful" do
       it 'returns an error message when user_id is invalid' do
-        user_1 = create(:user, id: 1)
+        create(:user, id: 1)
 
         get "/api/v1/users/007"
 

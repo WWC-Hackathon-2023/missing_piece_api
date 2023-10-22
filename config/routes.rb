@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       patch '/users/:user_id/puzzles/:puzzle_id', to: 'users/puzzles#update'
 
       post '/users/:user_id/loans', to: 'users/loans#create'
+      patch '/users/:id/loans/:loan_id', to: 'users/loans#update'
     end
   end
 end

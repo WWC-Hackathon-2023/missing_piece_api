@@ -21,12 +21,12 @@ class User < ApplicationRecord
     borrower_loans_with_puzzle = borrower_loans.includes(:puzzle).where(status: [0, 1])
 
     dashboard_info = {
-      id: id,
+      id:,
       user_info: {
-        full_name: full_name,
-        email: email,
-        zip_code: zip_code,
-        phone_number: phone_number
+        full_name:,
+        email:,
+        zip_code:,
+        phone_number:
       },
       owner_loans: [],
       borrower_loans: []

@@ -2,7 +2,7 @@
 
 class DashboardSerializer
   include JSONAPI::Serializer
-  attributes :user_info, 
-             :owner_loans, 
+  attributes :user_info,
+             :owner_loans,
              :borrower_loans
 end

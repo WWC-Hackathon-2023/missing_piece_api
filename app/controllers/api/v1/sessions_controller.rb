@@ -6,7 +6,7 @@ class Api::V1::SessionsController < ApplicationController
     if params[:email].present? && params[:password].present?
       returning_user = User.find_by(email: params[:email])
 
-      # the & is called a "safe navigation" operator 
+      # the & is called a "safe navigation" operator
       # It prevent a "NoMethodError" from being raised when invoking a method on nil
       if returning_user&.authenticate(params[:password])
         session[:user_id] = returning_user.id
@@ -24,9 +24,9 @@ class Api::V1::SessionsController < ApplicationController
     head :no_content
   end
 
-
   private
+  
   def authorize
-    return render json: { error: 'Not authorized' }, status: :unauthorized unless session[:user_id]
+    render json: { error: 'Not authorized' }, status: :unauthorized unless session[:user_id]
   end
 end

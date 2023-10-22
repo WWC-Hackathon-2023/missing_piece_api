@@ -20,7 +20,6 @@ Bundler.require(*Rails.groups)
 
 module MissingPiece
   class Application < Rails::Application
-
     # created session key:
     config.session_store :cookie_store, key: '_missing_piece_session'
     config.middleware.use ActionDispatch::Cookies

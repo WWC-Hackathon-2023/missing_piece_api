@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'User/PuzzlesController' do
+RSpec.describe 'Users/PuzzlesController' do
   describe '#index' do # My Collection Page
     before(:each) do
       @user_1 = create(:user, id: 1)
@@ -61,7 +61,7 @@ RSpec.describe 'User/PuzzlesController' do
       it 'returns a single puzzle & its attributes' do
         user_1 = create(:user, id: 1)
         puzzle_1 = create(:puzzle, user: user_1)
-        puzzle_2 = create(:puzzle, user: user_1)
+        create(:puzzle, user: user_1)
 
         get "/api/v1/users/#{user_1.id}/puzzles/#{puzzle_1.id}"
 
@@ -90,7 +90,7 @@ RSpec.describe 'User/PuzzlesController' do
       it 'returns an error message when user_id is invalid' do
         user_1 = create(:user, id: 1)
         puzzle_1 = create(:puzzle, user: user_1)
-        puzzle_2 = create(:puzzle, user: user_1)
+        create(:puzzle, user: user_1)
 
         get "/api/v1/users/007/puzzles/#{puzzle_1.id}"
 
@@ -109,8 +109,8 @@ RSpec.describe 'User/PuzzlesController' do
 
       it 'returns an error message when puzzle_id is invalid' do
         user_1 = create(:user, id: 1)
-        puzzle_1 = create(:puzzle, user: user_1)
-        puzzle_2 = create(:puzzle, user: user_1)
+        create(:puzzle, user: user_1)
+        create(:puzzle, user: user_1)
 
         get "/api/v1/users/#{user_1.id}/puzzles/007"
 

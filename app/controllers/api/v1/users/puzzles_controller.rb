@@ -26,6 +26,6 @@ class Api::V1::Users::PuzzlesController < ApplicationController
 
   private
   def puzzle_params
-    params.permit(:status, :title, :description, :total_pieces, :notes, :puzzle_image_url) # did not include user_id
+    params.permit(:status, :title, :description, :total_pieces, :notes) # did not include user_id
   end
 end

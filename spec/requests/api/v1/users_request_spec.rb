@@ -18,12 +18,11 @@ RSpec.describe 'UsersController' do
         expect(parsed_data[:data].keys).to eq([:id, :type, :attributes])
 
         expect(parsed_data[:data][:attributes]).to be_a(Hash)
-        expect(parsed_data[:data][:attributes].keys).to eq([:full_name, :email, :zip_code, :phone_number, :user_image_url])
+        expect(parsed_data[:data][:attributes].keys).to eq([:full_name, :email, :zip_code, :phone_number])
         expect(parsed_data[:data][:attributes][:full_name]).to eq(user_1.full_name)
         expect(parsed_data[:data][:attributes][:email]).to eq(user_1.email)
         expect(parsed_data[:data][:attributes][:zip_code]).to eq(user_1.zip_code)
         expect(parsed_data[:data][:attributes][:phone_number]).to eq(user_1.phone_number)
-        expect(parsed_data[:data][:attributes][:user_image_url]).to eq(user_1.user_image_url)
       end
     end
 
@@ -96,12 +95,11 @@ RSpec.describe 'UsersController' do
         expect(parsed_data[:data][:attributes].keys).to eq([:user_info, :owner_loans, :borrower_loans])
 
         expect(parsed_data[:data][:attributes][:user_info]).to be_a(Hash)
-        expect(parsed_data[:data][:attributes][:user_info].keys).to eq([:full_name, :email, :zip_code, :phone_number, :user_image_url])
+        expect(parsed_data[:data][:attributes][:user_info].keys).to eq([:full_name, :email, :zip_code, :phone_number])
         expect(parsed_data[:data][:attributes][:user_info][:full_name]).to eq(@user_1.full_name)
         expect(parsed_data[:data][:attributes][:user_info][:email]).to eq(@user_1.email)
         expect(parsed_data[:data][:attributes][:user_info][:zip_code]).to eq(@user_1.zip_code)
         expect(parsed_data[:data][:attributes][:user_info][:phone_number]).to eq(@user_1.phone_number)
-        expect(parsed_data[:data][:attributes][:user_info][:user_image_url]).to eq(@user_1.user_image_url)
         
         expect(parsed_data[:data][:attributes][:owner_loans]).to be_an(Array)
         expect(parsed_data[:data][:attributes][:owner_loans].size).to eq(3)
@@ -132,5 +130,44 @@ RSpec.describe 'UsersController' do
         expect(parsed_error_data[:errors][0][:detail]).to eq("Couldn't find User with 'id'=007")
       end
     end
+  end
+
+  describe '#create' do
+    context "when successful" do
+      it 'creates a new user' do
+        new_user_info = {
+          full_name: "Nancy Puzzler",
+          password: "puzzles4fun",
+          password_confirmation: "puzzles4fun",
+          email: "nancy@my_email.com",
+          zip_code: 12345,
+          phone_number: 5553039999
+        }
+
+        headers = { 'CONTENT_TYPE' => 'application/json' }
+        post "/api/v1/users", headers:, params: JSON.generate( new_user_info)
+
+        expect(response).to have_http_status(201)
+
+        parsed_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(parsed_data).to be_a(Hash)
+        expect(parsed_data.keys).to eq([:data])
+        expect(parsed_data[:data]).to be_a(Hash)
+        expect(parsed_data[:data].keys).to eq([:id, :type, :attributes])
+
+        expect(parsed_data[:data][:attributes]).to be_a(Hash)
+        expect(parsed_data[:data][:attributes].keys).to eq([:full_name, :email, :zip_code, :phone_number])
+        expect(parsed_data[:data][:attributes][:full_name]).to eq(new_user_info[:full_name])
+        expect(parsed_data[:data][:attributes][:email]).to eq(new_user_info[:email])
+        expect(parsed_data[:data][:attributes][:zip_code]).to eq(new_user_info[:zip_code])
+        expect(parsed_data[:data][:attributes][:phone_number]).to eq("(555) 303-9999")
+        expect(parsed_data[:data][:attributes][:user_image_url]).to eq(new_user_info[:user_image_url])
+
+      end
+    end
+
+    # context "when NOT successful" do
+    # end
   end
 end

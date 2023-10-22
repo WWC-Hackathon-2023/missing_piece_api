@@ -1,4 +1,6 @@
 class Api::V1::PuzzlesController < ApplicationController
+  skip_before_action :set_current_user, only: [:index]
+  
     def index
       zip_code = params[:zip_code]
       users = User.where(zip_code:) if zip_code.present?

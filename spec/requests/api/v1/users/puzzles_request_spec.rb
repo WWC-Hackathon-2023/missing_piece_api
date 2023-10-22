@@ -150,8 +150,7 @@ RSpec.describe 'Users/PuzzlesController' do
           title: "Winter Scene",
           description: "Log Cabin and Bear",
           total_pieces: 100,
-          notes: "This puzzle wasn't too difficult. It's fun to do with the whole family!",
-          puzzle_image_url: "/aws/s3/bucket/for_you.com"
+          notes: "This puzzle wasn't too difficult. It's fun to do with the whole family!"
         }
 
         headers = { 'CONTENT_TYPE' => 'application/json' }
@@ -174,14 +173,13 @@ RSpec.describe 'Users/PuzzlesController' do
         expect(parsed_data[:data][:attributes][:description]).to eq("Log Cabin and Bear")
         expect(parsed_data[:data][:attributes][:total_pieces]).to eq(100)
         expect(parsed_data[:data][:attributes][:notes]).to eq("This puzzle wasn't too difficult. It's fun to do with the whole family!")
-        expect(parsed_data[:data][:attributes][:puzzle_image_url]).to eq("/aws/s3/bucket/for_you.com")
+        expect(parsed_data[:data][:attributes][:puzzle_image_url]).to eq(@puzzle_2.puzzle_image_url)
 
         expect(parsed_data[:data][:attributes][:status]).to_not eq(@puzzle_2.status) # puzzle default enum status 0 = "Available"
         expect(parsed_data[:data][:attributes][:title]).to_not eq(@puzzle_2.title)
         expect(parsed_data[:data][:attributes][:description]).to_not eq(@puzzle_2.description)
         expect(parsed_data[:data][:attributes][:total_pieces]).to_not eq(@puzzle_2.total_pieces)
         expect(parsed_data[:data][:attributes][:notes]).to_not eq(@puzzle_2.notes)
-        expect(parsed_data[:data][:attributes][:puzzle_image_url]).to_not eq(@puzzle_2.puzzle_image_url)
       end
     end
 
@@ -254,7 +252,7 @@ RSpec.describe 'Users/PuzzlesController' do
           description: "Log Cabin and Bear",
           total_pieces: 1000,
           notes: "This puzzle wasn't too difficult. It's fun to do with the whole family!",
-          puzzle_image_url: "http://res.cloudinary.com/dwcorjdyo/image/upload/v1697926076/y6gkdqbwsh44wrw6iakc.jpg"
+          puzzle_image_url: "http://res.cloudinary.com/dwcorjdyo/image/upload/pretend_image.jpg"
         }
 
         headers = { 'CONTENT_TYPE' => 'application/json' }
@@ -277,7 +275,7 @@ RSpec.describe 'Users/PuzzlesController' do
         expect(parsed_data[:data][:attributes][:description]).to eq("Log Cabin and Bear")
         expect(parsed_data[:data][:attributes][:total_pieces]).to eq(1000)
         expect(parsed_data[:data][:attributes][:notes]).to eq("This puzzle wasn't too difficult. It's fun to do with the whole family!")
-        expect(parsed_data[:data][:attributes][:puzzle_image_url]).to eq("http://res.cloudinary.com/dwcorjdyo/image/upload/v1697926076/y6gkdqbwsh44wrw6iakc.jpg")
+        expect(parsed_data[:data][:attributes][:puzzle_image_url]).to eq("http://res.cloudinary.com/dwcorjdyo/image/upload/pretend_image.jpg")
       end
     end
 

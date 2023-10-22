@@ -12,7 +12,7 @@ class Api::V1::Users::PuzzlesController < ApplicationController
 
   def create
     user = User.find(params[:user_id])
-    puzzle = user.puzzles.build(puzzle_params)
+    puzzle = user.puzzles.new(puzzle_params)
     render json: PuzzleSerializer.new(puzzle), status: 201 if puzzle.save
   end
 
@@ -26,6 +26,6 @@ class Api::V1::Users::PuzzlesController < ApplicationController
 
   private
   def puzzle_params
-    params.permit(:status, :title, :description, :total_pieces, :notes) # did not include user_id
+    params.permit(:status, :title, :description, :total_pieces, :notes, :puzzle_image_url) # did not include user_id
   end
 end

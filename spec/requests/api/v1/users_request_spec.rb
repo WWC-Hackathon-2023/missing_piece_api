@@ -133,4 +133,34 @@ RSpec.describe 'UsersController' do
       end
     end
   end
+
+  describe '#create' do
+    context "when successful" do
+      it 'creates a new user' do
+        new_user_info = {
+          full_name: "Nancy Puzzler",
+          password: "puzzles4fun",
+          password_confirmation: "puzzles4fun",
+          email: "nancy@my_email.com",
+          zip_code: 12345,
+          phone_number: 5553039999
+        }
+
+        headers = { 'CONTENT_TYPE' => 'application/json' }
+        post "/api/v1/users", headers:, params: JSON.generate( new_user_info)
+
+        expect(response).to have_http_status(201)
+
+        parsed_data = JSON.parse(response.body, symbolize_names: true)
+
+        # expect(parsed_data).to be_a(Hash)
+        # expect(parsed_data.keys).to eq([:data])
+        # expect(parsed_data[:data]).to be_a(Hash)
+        # expect(parsed_data[:data].keys).to eq([:id, :type, :attributes])
+      end
+    end
+
+    # context "when NOT successful" do
+    # end
+  end
 end

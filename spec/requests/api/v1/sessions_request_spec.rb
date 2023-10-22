@@ -9,8 +9,8 @@ RSpec.describe 'SessionsController' do
           password: "PuzzleQueen1",
           password_confirmation: "PuzzleQueen1",
           email: "dpuzzler@myemail.com",
-          zip_code: 12345,
-          phone_number: 5550009999 
+          zip_code: 12_345,
+          phone_number: 5_550_009_999
         )
 
         login_data = {
@@ -19,7 +19,7 @@ RSpec.describe 'SessionsController' do
         }
 
         headers = { 'CONTENT_TYPE' => 'application/json' }
-        post '/api/v1/login', headers: headers, params: JSON.generate(login_data)
+        post '/api/v1/login', headers:, params: JSON.generate(login_data)
 
         expect(response).to have_http_status(201)
 
@@ -38,7 +38,7 @@ RSpec.describe 'SessionsController' do
         login_data = { email: user.email, password: user.password }
 
         headers = { 'CONTENT_TYPE' => 'application/json' }
-        post '/api/v1/login', headers: headers, params: JSON.generate(login_data)
+        post '/api/v1/login', headers:, params: JSON.generate(login_data)
 
         expect(response).to have_http_status(201)
 

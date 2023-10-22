@@ -10,10 +10,10 @@ require 'faker'
 # Create users
 10.times do
   password = Faker::Alphanumeric.alphanumeric(number: 10, min_alpha: 3, min_numeric: 3)
-  
+
   User.create(
     full_name: Faker::Name.name,
-    password: password,
+    password:,
     password_confirmation: password,
     email: Faker::Internet.email,
     zip_code: Faker::Address.zip_code,

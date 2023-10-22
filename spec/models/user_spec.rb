@@ -24,39 +24,39 @@ RSpec.describe User, type: :model do
         @user_2 = create(:user, id: 2)
         @user_3 = create(:user, id: 3)
         @user_4 = create(:user, id: 4)
-  
+
         5.times do
           create(:puzzle, user: @user_1)
         end
-  
+
         4.times do
           create(:puzzle, user: @user_2)
         end
-  
+
         3.times do
           create(:puzzle, user: @user_3)
         end
-  
+
         2.times do
           create(:puzzle, user: @user_4)
         end
-  
+
         @loan_1 = create(:loan, owner: @user_1, borrower: @user_2)
         @loan_2 = create(:loan, owner: @user_1, borrower: @user_3)
         @loan_3 = create(:loan, owner: @user_1, borrower: @user_4)
-  
+
         @loan_4 = create(:loan, owner: @user_2, borrower: @user_1)
         @loan_5 = create(:loan, owner: @user_2, borrower: @user_1)
         @loan_6 = create(:loan, owner: @user_3, borrower: @user_1, status: 2)
         @loan_7 = create(:loan, owner: @user_4, borrower: @user_1, status: 3)
       end
-      
+
       it "returns a Dashboard object with user_info, owner_loans, and borrower_loans" do
         expected_user = {
           full_name: @user_1.full_name,
           email: @user_1.email,
           zip_code: @user_1.zip_code,
-          phone_number: @user_1.phone_number,
+          phone_number: @user_1.phone_number
         }
 
         dashboard_info = @user_1.find_dashboard_info

@@ -3,7 +3,7 @@ class Api::V1::Users::LoansController < ApplicationController
     puzzle = Puzzle.find(params[:puzzle_id])
     borrower = User.find(params[:borrower_id])
 
-    loan = Loan.new(owner: puzzle.user, puzzle:, borrower:)
+    loan = Loan.new(owner: puzzle.user, puzzle: puzzle, borrower: borrower)
 
     if loan.save
       render json: LoanSerializer.new(loan), status: 201

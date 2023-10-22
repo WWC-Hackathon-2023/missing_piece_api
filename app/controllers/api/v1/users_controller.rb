@@ -11,6 +11,7 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     new_user = User.new(user_params)
+    new_user.email.downcase
     new_user.format_phone_number
     if new_user.save
       session[:user_id] = new_user.id

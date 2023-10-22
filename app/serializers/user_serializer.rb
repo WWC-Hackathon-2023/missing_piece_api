@@ -5,6 +5,5 @@ class UserSerializer
   attributes :full_name,
              :email,
              :zip_code,
-             :phone_number,
-             :user_image_url
+             :phone_number
 end

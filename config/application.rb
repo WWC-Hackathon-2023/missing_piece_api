@@ -20,6 +20,12 @@ Bundler.require(*Rails.groups)
 
 module MissingPiece
   class Application < Rails::Application
+
+    # created session key:
+    config.session_store :cookie_store, key: '_missing_piece_session'
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use config.session_store, config.session_options
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 

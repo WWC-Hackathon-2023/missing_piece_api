@@ -11,6 +11,10 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  def format_phone_number
+    phone_number.insert(0, '(').insert(4, ')').insert(5, " ").insert(9, "-")
+  end
+
   # This method needs a HUGE refactor:
   def find_dashboard_info
     owner_loans_with_puzzle = owner_loans.includes(:puzzle).where(status: [0, 1])
@@ -22,8 +26,7 @@ class User < ApplicationRecord
         full_name: full_name,
         email: email,
         zip_code: zip_code,
-        phone_number: phone_number,
-        user_image_url: user_image_url
+        phone_number: phone_number
       },
       owner_loans: [],
       borrower_loans: []

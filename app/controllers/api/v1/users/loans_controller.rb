@@ -4,8 +4,9 @@ class Api::V1::Users::LoansController < ApplicationController
 
   def create
     loan = Loan.new(owner_id: @owner.id, puzzle_id: @puzzle.id, borrower_id: @borrower.id)
-    
+
     if loan.save
+      loan.puzzle.update(status: 1)
       render json: LoanSerializer.new(loan), status: :created #201
     else
       render json: { error: "Unable to create loan" }, status: :unprocessable_entity #422
@@ -13,17 +14,24 @@ class Api::V1::Users::LoansController < ApplicationController
   end
 
   def update
-    user = User.find(params[:id])
     loan = Loan.find(params[:loan_id])
 
-    if params[:action_type] == 'deny' || params[:action_type] == 'withdraw'
-      if loan.update(status: 2)
-        render json: LoanSerializer.new(loan), status: 200
-      else
-        render json: { error: "Unable to update loan status" }, status: 422
-      end
-    elsif params[:action_type] == 'invalid_action'
-      render json: { error: "Invalid action" }, status: 422
+    if params[:action_type] == 'accept'
+      loan.update(status: 1)
+      loan.puzzle.update(status: 2)
+      render json: LoanSerializer.new(loan), status: 200 
+    elsif params[:action_type] == 'withdraw'
+      loan.update(status: 2)
+      loan.puzzle.update(status: 0)
+      render json: LoanSerializer.new(loan), status: 200 
+    elsif params[:action_type] == 'deny' 
+      loan.update(status: 2)
+      loan.puzzle.update(status: 2)
+      render json: LoanSerializer.new(loan), status: 200
+    elsif params[:action_type] == 'close'
+      loan.update(status: 3)
+      loan.puzzle.update(status: 0)
+      render json: LoanSerializer.new(loan), status: 200 
     else
       render json: { error: "Unable to update loan status" }, status: 422
     end

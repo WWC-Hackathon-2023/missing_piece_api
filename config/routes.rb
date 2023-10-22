@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
       get '/users/:user_id/puzzles', to: 'users/puzzles#index'
       get '/users/:user_id/puzzles/:puzzle_id', to: 'users/puzzles#show'
+      post '/users/:user_id/puzzles', to: 'users/puzzles#create'
       patch '/users/:user_id/puzzles/:puzzle_id', to: 'users/puzzles#update'
 
       post '/users/:user_id/loans', to: 'users/loans#create'

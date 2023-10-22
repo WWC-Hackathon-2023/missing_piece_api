@@ -6,11 +6,16 @@ RSpec.describe 'Users/LoansController' do
     let(:user_2) { create(:user, id: 2) }
     let(:puzzle_1) { create(:puzzle, user: user_1) }
     let(:loan_1) { create(:loan, owner: user_1, borrower: user_2) }
+    
     context "when successful" do
       it 'creates a new loan' do
+        user_1 = create(:user, id: 1)
+        user_2 = create(:user, id: 2)
+        puzzle_1 = create(:puzzle, user: user_1)
+        
         post "/api/v1/users/#{user_1.id}/loans", params: {
           puzzle_id: puzzle_1.id,
-          borrower_id: loan_1.borrower.id
+          borrower_id: user_2.id
         }
 
         expect(response).to have_http_status(201)
@@ -24,15 +29,20 @@ RSpec.describe 'Users/LoansController' do
 
         expect(parsed_data[:data][:attributes]).to be_a(Hash)
         expect(parsed_data[:data][:attributes].keys).to eq([:owner_id, :borrower_id, :puzzle_id, :status])
-        expect(parsed_data[:data][:attributes][:owner_id]).to eq(loan_1.owner_id)
-        expect(parsed_data[:data][:attributes][:borrower_id]).to eq(loan_1.borrower_id)
-        expect(parsed_data[:data][:attributes][:puzzle_id]).to eq(loan_1.puzzle_id)
-        expect(parsed_data[:data][:attributes][:status]).to eq(loan_1.status)
+        expect(parsed_data[:data][:attributes][:owner_id]).to eq(user_1.id)
+        expect(parsed_data[:data][:attributes][:borrower_id]).to eq(user_2.id)
+        expect(parsed_data[:data][:attributes][:puzzle_id]).to eq(puzzle_1.id)
+        expect(parsed_data[:data][:attributes][:status]).to eq("Pending")
       end
     end
 
     context "when NOT successful" do
-      it 'creates an error message' do
+      it 'returns an error message if trying to make the same loan twice' do
+        user_1 = create(:user, id: 1)
+        user_2 = create(:user, id: 2)
+        puzzle_1 = create(:puzzle, user: user_1)
+
+        create(:loan, owner: user_1, borrower: user_2, puzzle: puzzle_1)
         allow(Loan).to receive(:new).and_return(double(save: false))
 
         post "/api/v1/users/#{user_1.id}/loans", params: {
@@ -47,6 +57,44 @@ RSpec.describe 'Users/LoansController' do
         expect(parsed_error_data).to be_a(Hash)
         expect(parsed_error_data.keys).to eq([:error])
         expect(parsed_error_data[:error]).to eq("Unable to create loan")
+      end
+
+      it 'returns an error message if trying to make a loan when a Puzzle status is Pending' do
+        user_1 = create(:user, id: 1)
+        user_2 = create(:user, id: 2)
+        puzzle_1 = create(:puzzle, user: user_1, status: 1) #Puzzle status 1 = "Pending"
+
+        post "/api/v1/users/#{user_1.id}/loans", params: {
+          puzzle_id: puzzle_1.id,
+          borrower_id: user_2.id
+        }
+
+        expect(response).to have_http_status(422)
+
+        parsed_error_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(parsed_error_data).to be_a(Hash)
+        expect(parsed_error_data.keys).to eq([:error])
+        expect(parsed_error_data[:error]).to eq("Puzzle is not available for loan.")
+      end
+
+      it 'returns an error message if trying to make a loan when a Puzzle status is Not Available' do
+        user_1 = create(:user, id: 1)
+        user_2 = create(:user, id: 2)
+        puzzle_1 = create(:puzzle, user: user_1, status: 2) #Puzzle status 2 = "Not Available"
+
+        post "/api/v1/users/#{user_1.id}/loans", params: {
+          puzzle_id: puzzle_1.id,
+          borrower_id: user_2.id
+        }
+
+        expect(response).to have_http_status(422)
+
+        parsed_error_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(parsed_error_data).to be_a(Hash)
+        expect(parsed_error_data.keys).to eq([:error])
+        expect(parsed_error_data[:error]).to eq("Puzzle is not available for loan.")
       end
     end
   end

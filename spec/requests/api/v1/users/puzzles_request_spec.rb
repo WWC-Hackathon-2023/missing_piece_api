@@ -150,8 +150,7 @@ RSpec.describe 'Users/PuzzlesController' do
           title: "Winter Scene",
           description: "Log Cabin and Bear",
           total_pieces: 100,
-          notes: "This puzzle wasn't too difficult. It's fun to do with the whole family!",
-          puzzle_image_url: "/aws/s3/bucket/for_you.com"
+          notes: "This puzzle wasn't too difficult. It's fun to do with the whole family!"
         }
 
         headers = { 'CONTENT_TYPE' => 'application/json' }
@@ -174,14 +173,13 @@ RSpec.describe 'Users/PuzzlesController' do
         expect(parsed_data[:data][:attributes][:description]).to eq("Log Cabin and Bear")
         expect(parsed_data[:data][:attributes][:total_pieces]).to eq(100)
         expect(parsed_data[:data][:attributes][:notes]).to eq("This puzzle wasn't too difficult. It's fun to do with the whole family!")
-        expect(parsed_data[:data][:attributes][:puzzle_image_url]).to eq("/aws/s3/bucket/for_you.com")
+        expect(parsed_data[:data][:attributes][:puzzle_image_url]).to eq(@puzzle_2.puzzle_image_url)
 
         expect(parsed_data[:data][:attributes][:status]).to_not eq(@puzzle_2.status) # puzzle default enum status 0 = "Available"
         expect(parsed_data[:data][:attributes][:title]).to_not eq(@puzzle_2.title)
         expect(parsed_data[:data][:attributes][:description]).to_not eq(@puzzle_2.description)
         expect(parsed_data[:data][:attributes][:total_pieces]).to_not eq(@puzzle_2.total_pieces)
         expect(parsed_data[:data][:attributes][:notes]).to_not eq(@puzzle_2.notes)
-        expect(parsed_data[:data][:attributes][:puzzle_image_url]).to_not eq(@puzzle_2.puzzle_image_url)
       end
     end
 
@@ -240,5 +238,48 @@ RSpec.describe 'Users/PuzzlesController' do
 
       # REFACTOR: We could add a test to limit the integers allowed for for total_pieces. Ex: [260, 500, 1000, 1500, 2000, 3000] only?
     end
+  end
+
+  describe '#create' do
+    before(:each) do
+      @user_1 = create(:user, id: 1)
+    end
+
+    context "when successful" do
+      it "can create a new puzzle object" do
+        new_puzzle_info = {
+          title: "Winter Scene",
+          description: "Log Cabin and Bear",
+          total_pieces: 1000,
+          notes: "This puzzle wasn't too difficult. It's fun to do with the whole family!",
+          puzzle_image_url: "http://res.cloudinary.com/dwcorjdyo/image/upload/pretend_image.jpg"
+        }
+
+        headers = { 'CONTENT_TYPE' => 'application/json' }
+        post "/api/v1/users/#{@user_1.id}/puzzles", headers:, params: JSON.generate(new_puzzle_info)
+
+        expect(response).to have_http_status(201)
+
+        parsed_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(parsed_data).to be_a(Hash)
+        expect(parsed_data.keys).to eq([:data])
+        expect(parsed_data[:data]).to be_a(Hash)
+        expect(parsed_data[:data].keys).to eq([:id, :type, :attributes])
+
+        expect(parsed_data[:data][:attributes]).to be_a(Hash)
+        expect(parsed_data[:data][:attributes].keys).to eq([:user_id, :status, :title, :description, :total_pieces, :notes, :puzzle_image_url])
+        expect(parsed_data[:data][:attributes][:user_id]).to eq(@user_1.id)
+        expect(parsed_data[:data][:attributes][:status]).to eq("Available") # enums digit is transformed into string
+        expect(parsed_data[:data][:attributes][:title]).to eq("Winter Scene")
+        expect(parsed_data[:data][:attributes][:description]).to eq("Log Cabin and Bear")
+        expect(parsed_data[:data][:attributes][:total_pieces]).to eq(1000)
+        expect(parsed_data[:data][:attributes][:notes]).to eq("This puzzle wasn't too difficult. It's fun to do with the whole family!")
+        expect(parsed_data[:data][:attributes][:puzzle_image_url]).to eq("http://res.cloudinary.com/dwcorjdyo/image/upload/pretend_image.jpg")
+      end
+    end
+
+    # context "when NOT successful" do
+    # end
   end
 end

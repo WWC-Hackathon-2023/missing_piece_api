@@ -25,7 +25,7 @@ class Api::V1::SessionsController < ApplicationController
   end
 
   private
-
+  
   def authorize
     render json: { error: 'Not authorized' }, status: :unauthorized unless session[:user_id]
   end

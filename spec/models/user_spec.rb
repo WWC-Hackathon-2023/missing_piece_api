@@ -57,7 +57,6 @@ RSpec.describe User, type: :model do
           email: @user_1.email,
           zip_code: @user_1.zip_code,
           phone_number: @user_1.phone_number,
-          user_image_url: @user_1.user_image_url
         }
 
         dashboard_info = @user_1.find_dashboard_info

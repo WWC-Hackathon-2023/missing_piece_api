@@ -8,7 +8,6 @@ class ApplicationController < ActionController::API
     render json: ErrorSerializer.new(exception, 404).serializable_hash, status: :not_found # 404
   end
 
-
   def set_current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end

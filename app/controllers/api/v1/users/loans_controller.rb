@@ -14,13 +14,11 @@ class Api::V1::Users::LoansController < ApplicationController
 
   def update
     user = User.find(params[:id])
-    loans = Loan.where(owner_id: user.id).or(Loan.where(borrower_id: user.id))
-    loan_id = loans.find(params[:loan_id])
+    loan = Loan.find(params[:loan_id])
 
     if params[:action_type] == 'deny' || params[:action_type] == 'withdraw'
-      if loan_id.update(status: 2)
-        dashboard_info = user.find_dashboard_info
-        render json: LoanSerializer.new(loan_id), status: 200
+      if loan.update(status: 2)
+        render json: LoanSerializer.new(loan), status: 200
       else
         render json: { error: "Unable to update loan status" }, status: 422
       end

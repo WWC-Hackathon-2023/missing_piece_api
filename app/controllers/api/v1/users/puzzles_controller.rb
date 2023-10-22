@@ -1,7 +1,4 @@
-module Api
-  module V1
-    module Users
-      class PuzzlesController < ApplicationController
+ class Api::V1::Users::PuzzlesController < ApplicationController
         def index
           user = User.find(params[:user_id])
           render json: PuzzleSerializer.new(user.puzzles)

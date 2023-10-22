@@ -8,6 +8,9 @@ Rails.application.routes.draw do
       # resources :users, only: [:show] #for ease of understanding, we will skip resoruces for now
       put '/puzzles', to: 'puzzles#index'
 
+      post '/login', to: 'sessions#create'
+      delete '/logout', to: 'sessions#destroy'
+
       get '/users/:user_id', to: 'users#show'
       get '/users/:user_id/dashboard', to: 'users#dashboard'
       post '/users', to: 'users#create'

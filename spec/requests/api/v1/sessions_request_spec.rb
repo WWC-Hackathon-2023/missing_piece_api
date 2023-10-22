@@ -42,7 +42,9 @@ RSpec.describe 'SessionsController' do
 
         expect(response).to have_http_status(201)
 
-        delete '/api/v1/logout', headers: headers
+        token = JSON.parse(response.body)['token']
+
+        delete '/api/v1/logout', headers: { 'Authorization' => "Bearer #{token}" }
 
         expect(response).to have_http_status(204)
 

@@ -13,7 +13,7 @@
   <p align="center">
     A puzzle exhange app to get local retirees swapping puzzles to keep their minds sharp & meet others without the pressure of attending an event!
     <hr>
-    If you have a collection of puzzles and you're eager to swap them for new challenges, you're in the right spot. Join our community of fellow puzzle enthusiasts and dive into a world of delightful exchanges. Happy Puzzle-ing!
+    If you have a collection of puzzles and are eager for new challenges, you're in the right spot. Join our community of fellow puzzle enthusiasts and dive into a world of delightful exchanges. Happy Puzzle-ing!
   </p>
 </div>
 <hr>
@@ -62,7 +62,11 @@
 <!-- WWC Hackathon -->
 ### Women Who Code Hackathon for Social Good
 
-  **The Missing Piece** was created by an international team of both FrontEnd and BackEnd developers for the [Women Who Code (WWC) Hackathon for Social Good 2023](https://hopin.com/events/wwcode-hackathon-for-social-good/registration). The Social Good that the Missing Piece Team chose to address is the emotional and mental wellbeing of retirees and seniors. 
+  **The Missing Piece** was created by an international team of both FrontEnd and BackEnd developers for the [Women Who Code (WWC) Hackathon for Social Good 2023](https://hopin.com/events/wwcode-hackathon-for-social-good/registration). 
+  
+  The Women Who Code Hackathon for Social Good requires that every project aims to support a target group: The Missing Piece Team chose to to address is the emotional and mental wellbeing of retirees and seniors by creating an app to facilitate the sharing of items. For our MVP (minimum viable product) we chose to focus on one item type: puzzles.
+  
+  Why puzzles? Well, puzzles tend to accumulate over a lifetime and end up in boxes in the attic, never to be seen again. They're purchased, completed a few times, and then put away. A puzzle is a type of item that can be exchanged and returned over and over... plus it's fun to work on new ones without having to buy yet another puzzle!
 
   - `Challenge Statement`
 
@@ -622,10 +626,26 @@ Happy path and sad path testing were considered and tested. When a request canno
 <details>
   <summary>Refactor/Changes</summary>
   <dl>
-    <dt>Idea1</dt>
-      <dd>- notes</dd>
-    <dt>Idea2</dt>
-      <dd>- notes</dd>
+    <dt>Conduct a solid refactor of exsisting code</dt>
+      <dd>- With the limited time of the Hackathon, reviewing the code slower would be first</dd>
+    <dt>Allow a loan to have more than one puzzle</dt>
+      <dd>- This was the original idea for the schema and would involve a join table</dd>
+    <dt>Refactor our connectiong with Cloudinary for multiple image upload & profile images</dt>
+      <dd>- This would possibly require an new table to store puzzle image urls</dd>
+    <dt>Include other item types that could be borrowed</dt>
+      <dd>- Deciding which other item types might be most suited for this app</dd>
+      <dd>- And we'd create more tables! Oh-la-la!</dd>
+    <dt>Incorporate internal communication tools</dt>
+      <dd>- Internal or external emails and/or text messages might be concidered</dd>
+      <dd>- If so we'd look to Twilio/Send Grid as a start</dd>
+    <dt>Allow users to create a 'Puzzle Party' and invite others</dt>
+      <dd>- Additional tables in the database would be required: parties and user_parties</dd>
+      <dd>- The user table might also become a self-referential table so users can store "friends"</dd>
+    <dt>Add functionality so users can share images or 'Puzzle Parties' on social media</dt>
+        <dd>- Examples would include Facebook and Instagram</dd>
+    <dt>Scale up for international participation</dt>
+      <dd>- Changes would need to be made to both FE form input and BE database validations to allow for multi-formatted and multi-length input of zip codes and phone numbers.</dd>
+      <dd>- As a website scales up run times become a consideration so we would also aim to implement background workers and caching</dd>
   </dl>
 </details>
 

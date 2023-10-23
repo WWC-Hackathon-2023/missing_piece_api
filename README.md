@@ -62,9 +62,8 @@
 <!-- WWC Hackathon -->
 ### Women Who Code Hackathon for Social Good
 
-  **The Missing Piece** was created by an international team of both FrontEnd and BackEnd developers for the [Women Who Code (WWC) Hackathon for Social Good 2023](https://hopin.com/events/wwcode-hackathon-for-social-good/registration).
+  **The Missing Piece** was created by an international team of both FrontEnd and BackEnd developers for the [Women Who Code (WWC) Hackathon for Social Good 2023](https://hopin.com/events/wwcode-hackathon-for-social-good/registration). The Social Good that the Missing Piece Team chose to address is the emotional and mental wellbeing of retirees and seniors. 
 
-  The Social Good that **The Missing Piece** addresses is the wellbeing of retirees and seniors. 
   - `Challenge Statement`
 
     According to the National Institute of Health, prior to the COVID outbreak, investigators found out that 24% of American individuals 65 and over were socially isolated. That's approximately 7.7 million people. The U.S. Health and Retirement Study reports that 43% of Americans aged 60 or older also reported feeling lonely, which can lead to debilitating issues like depression and anxiety for our loved ones... now think about this on a global scale! [ref](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7437541/) 
@@ -88,8 +87,16 @@
 ![Ruby on Rails](https://img.shields.io/badge/Ruby_on_Rails-CC0000?style=for-the-badge&logo=ruby-on-rails&logoColor=white) 
 <img src=".github/rspec_badge.jpg" alt="Rspec Badge" height="27">
 ![Postgresql](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![VScode](https://img.shields.io/badge/VS%20Code-007ACC.svg?style=for-the-badge&logo=Visual-Studio-Code&logoColor=white)
 ![Heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)
-![AmazonAWS](https://img.shields.io/badge/Amazon_AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
+![GitHubActions](https://img.shields.io/badge/GitHub%20Actions-2088FF.svg?style=for-the-badge&logo=GitHub-Actions&logoColor=white)
+![Postman](https://img.shields.io/badge/Postman-FF6C37.svg?style=for-the-badge&logo=Postman&logoColor=white)
+![Cloudinary](https://img.shields.io/badge/Cloudinary-2C39BD.svg?style=for-the-badge&logo=iCloud&logoColor=white)
+![1Password](https://img.shields.io/badge/1Password-1A285F.svg?style=for-the-badge&logo=1Password&logoColor=white)
+![Notion](https://img.shields.io/badge/Notion-EAEAEA.svg?style=for-the-badge&logo=Notion&logoColor=black)
+![Miro](https://img.shields.io/badge/Miro-FFCD11.svg?style=for-the-badge&logo=Miro&logoColor=black)
+![Figma](https://img.shields.io/badge/Figma-8669AE.svg?style=for-the-badge&logo=Figma&logoColor=white)
+
 
 <!-- ![GoogleCloud](https://img.shields.io/badge/Google_Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)
 ![CircleCI](https://img.shields.io/badge/circleci-343434?style=for-the-badge&logo=circleci&logoColor=white)

@@ -10,9 +10,9 @@
 
 <h3 align="center">The Missing Piece</h3>
   <p align="center">
-    Together we can create a better world. One individual piece at a time.
+    Together we can create a better world. One individual piece at a time. 
     <hr>
-    An item exchange app to get local retirees swapping puzzles to keep their minds sharp & meet others without the pressure of attending an event! If you have a collection of puzzles and are eager for new challenges, you're in the right spot. Join our community of fellow puzzle enthusiasts and dive into a world of delightful exchanges. Happy Puzzle-ing!
+    An item exchange app to get local retirees swapping puzzles to keep their minds sharp & meet others without the pressure of attending an event! So if you have a collection of puzzles and are eager for new challenges, you're in the right spot: Join our community of fellow puzzle enthusiasts and dive into a world of delightful exchanges. Happy Puzzle-ing!
   </p>
 </div>
 <hr>

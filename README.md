@@ -40,7 +40,7 @@
     </li>
     <li><a href="#endpoints">Endpoints</a></li>
     <!-- <li><a href="#apis">APIs Used</a></li> -->
-    <li><a href="#technologies">Other Technologies Used</a></li>
+    <li><a href="#technologies">New Technologies Used</a></li>
     <li><a href="#contact">Contributors</a></li>
     <li><a href="#refactor">Future Iterations</a></li>
   </ol>
@@ -290,6 +290,7 @@ Happy path and sad path testing were considered and tested. When a request canno
 
 <details>
   <summary><code>DELETE "/api/v1/users/:id/logout"</code></summary>
+
   Response:
   <br>
   Status: `204`
@@ -297,6 +298,7 @@ Happy path and sad path testing were considered and tested. When a request canno
 
 <details>
   <summary><code>GET "/api/v1/users/:id"</code></summary>
+
   Response:
   <br>
   Status: `200`
@@ -320,6 +322,7 @@ Happy path and sad path testing were considered and tested. When a request canno
 
 <details>
   <summary><code>GET "/api/v1/users/:id/dashboard"</code></summary>
+
   Response:
   <br>
   Status: `200`
@@ -411,6 +414,7 @@ Happy path and sad path testing were considered and tested. When a request canno
 
 <details>
   <summary><code>GET "/api/v1/users/:id/puzzles"</code></summary>
+
   Response: 
   <br>
   Status: `200`
@@ -452,6 +456,7 @@ Happy path and sad path testing were considered and tested. When a request canno
 
 <details>
   <summary><code>GET "/api/v1/users/:id/puzzles/:id" </code></summary>
+
   Response: 
   <br>
   Status: `200`
@@ -553,6 +558,7 @@ Happy path and sad path testing were considered and tested. When a request canno
 
 <details>
   <summary><code>PATCH "/api/v1/users/:id/loans/:id"</code></summary>
+
   owner clicks `accept` OR borrower clicks `withdraw` OR owner clicks `deny` OR when loan is `complete` 
   Request Body:
   <pre>
@@ -586,36 +592,27 @@ Happy path and sad path testing were considered and tested. When a request canno
 </details>
 <br>
 
-View these endpoints in [![Run in Postman](https://run.pstmn.io/button.svg)](Add link here)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.postman.com/advanced-language-practices/workspace/missing-piece/collection/26102509-8083c615-1962-4375-be58-d0d124c35756?action=share&creator=26102509)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- APIs Used 
 <h2 id="apis">APIs Used</h2>
-
 [Name](link) was consumed to generate ________
-
 [Name](link) was used to create __________
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 <!-- Technologies Used -->
-<h2 id="technologies">Technologies Used</h2>
+<h2 id="technologies">New Technologies Used</h2>
+
+![1Password](https://img.shields.io/badge/1Password-1A285F.svg?style=for-the-badge&logo=1Password&logoColor=white)
 
 [Passage by 1Password](https://passage.1password.com/) was used to authenticate users and ensure login was easy, safe, and quick.
+<br><br>
 
-<!-- NOTE: need to add image and more details -->
+![Cloudinary](https://img.shields.io/badge/Cloudinary-2C39BD.svg?style=for-the-badge&logo=iCloud&logoColor=white)
 
-[Amazon Web Services](https://aws.amazon.com/) was used to allow users to upload photos for their puzzles.
-
-<details>
-  <summary><img src= "https://logos-world.net/wp-content/uploads/2021/08/Amazon-Web-Services-AWS-Logo.png" style="width:60px; height:40px;"><strong>Amazon S3 Cloud Object Storage</strong></summary><br>
-  <p>By including amazon's web service for storage, we can allow users to upload their pictures which are then saved as objects in a "bucket".  </p>
-
-  More information on the gem used for this(`aws-sdk-s3`) can be found [here](https://github.com/aws/aws-sdk-ruby)
-</details>
-<br>
-
+[Cloudinary](https://cloudinary.com/) was used to allow users to seamlessly upload images for their puzzles.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -632,12 +629,10 @@ View these endpoints in [![Run in Postman](https://run.pstmn.io/button.svg)](Add
   </dl>
 </details>
 
-
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<h2 id="contact">Contributors</h2>
 
+<h2 id="contact">Contributors</h2>
 
 | [<img alt="Paola Andrea Ramirez Quintero" width="75" src=".github/Andrea.jpeg"/>](https://www.linkedin.com/in/paola-andrea-ramirez-quintero/) | [<img alt="Carmen Luna" width="75" src=".github/Carmen.jpg"/>](https://www.linkedin.com/in/carmen-luna-cllp/) | [<img alt="Natalia Torrejon" width="75" src=".github/Nati.jpeg"/>](https://www.linkedin.com/in/natalia-torrejon-developer/) | [<img alt="Kemi Thomas" width="75" src=".github/Kemi.jpeg"/>](https://www.linkedin.com/in/kemi-thomas/) | [<img alt="Bisrat Melak" width="75" src=".github/Bisrat.jpeg"/>](https://www.linkedin.com/in/bisrat-melak/) | [<img alt="Melony Erin Franchini" width="75" src=".github/Melony.jpg"/>](https://www.linkedin.com/in/melony-erin-franchini/) |
 | ------------------ | ------------ | -------------- | ----------- | -------------- | ----------- |

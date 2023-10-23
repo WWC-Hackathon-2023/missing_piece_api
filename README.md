@@ -97,12 +97,6 @@
 ![Miro](https://img.shields.io/badge/Miro-FFCD11.svg?style=for-the-badge&logo=Miro&logoColor=black)
 ![Figma](https://img.shields.io/badge/Figma-8669AE.svg?style=for-the-badge&logo=Figma&logoColor=white)
 
-
-<!-- ![GoogleCloud](https://img.shields.io/badge/Google_Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)
-![CircleCI](https://img.shields.io/badge/circleci-343434?style=for-the-badge&logo=circleci&logoColor=white)
-<img src="https://sendgrid.com/brand/sg-twilio/SG_Twilio_Lockup_RGB-WHT-Textx2.png" height="23"> -->
-
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
@@ -122,23 +116,25 @@ If you'd like to demo this API on your local machine:
 ### Prerequisites
 
 - Ruby Version 3.1.1
-- Rails Version 7.0.4.x
-- Bundler Version 2.4.9
+- Rails Version 7.0.8.x
+- Bundler Version 2.4.13
 
 <!-- Schema -->
 ### Schema
 
-<!-- <img src=".github/schema.png" alt="Schema" width="100%"> -->
+<div align="center">
+  <img src=".github/missing_piece_schema.jpg" alt="Missing Piece Schema">
+</div>
 
 <!-- Testing -->
 ### Testing
 To test the entire spec suite, run `bundle exec rspec`.
 *All tests should be passing.*
 
-Happy path, sad path, and edge testing were considered and tested. When a request cannot be completed, an error object is returned.
+Happy path and sad path testing were considered and tested. When a request cannot be completed, an error object is returned.
 
 <details>
-  <summary>Error Object</summary>
+  <summary>Error Objects</summary>
     <pre>
     <code>
 {
@@ -154,6 +150,14 @@ Happy path, sad path, and edge testing were considered and tested. When a reques
 }
     </code>
   </pre>
+
+   <pre>
+    <code>
+{ 
+  "error": "Unable to update loan status" 
+}
+    </code>
+  </pre>
 </details>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -162,17 +166,7 @@ Happy path, sad path, and edge testing were considered and tested. When a reques
 ## Endpoints
 
 <details>
-  <summary><code>GET "/api/v1/root"</code></summary>
-  Response:
-  <pre>
-    <code>
-      { data }
-    </code>
-  </pre>
-</details>
-
-<details>
-  <summary><code>GET "/api/v1/puzzles"</code></summary>
+  <summary><code>PUT "/api/v1/puzzles"</code></summary>
   Request Body:
   <pre>
     <code>
@@ -183,39 +177,41 @@ Happy path, sad path, and edge testing were considered and tested. When a reques
   </pre>
 
   Response:
-  <pre>
-    <code>
-{ data }
-    </code>
-  </pre>
-</details>
+  <br>
+  Status: `200`
 
-<details>
-  <summary><code>GET "/api/v1/users/:id/puzzles/:id"</code></summary>
-  Response:
   <pre>
     <code>
-{ data }
-    </code>
-  </pre>
-</details>
-
-<details>
-  <summary><code>Authorization Page</code></summary>
-  Response:
-  <pre>
-    <code>
-{ data }
-    </code>
-  </pre>
-</details>
-
-<details>
-  <summary><code>GET "/api/v1/users/:id"</code></summary>
-  Response:
-  <pre>
-    <code>
-{ data }
+{
+    "data": [
+        {
+            "id": "1",
+            "type": "puzzle",
+            "attributes": {
+                "user_id": 1,
+                "status": "Available",
+                "title": "Flower Cycle",
+                "description": "A flower collage by Rosalind Wise",
+                "total_pieces": 1000,
+                "notes": "Very Difficult! Only for the brave of heart!",
+                "puzzle_image_url": "https://cloudinary.com/image/Flower_Cycle.jpg"
+            }
+        },
+        {
+            "id": "2",
+            "type": "puzzle",
+            "attributes": {
+                "user_id": 1,
+                "status": "Available",
+                "title": "Mountain Chalet",
+                "description": "Cabin near lake and mountains",
+                "total_pieces": 1000,
+                "notes": "Relaxing, feels like you're in Colorado!",
+                "puzzle_image_url": "https://cloudinary.com/image/Mountain_Chalet.jpg"
+            }
+        }, {...}
+    ]
+}
     </code>
   </pre>
 </details>
@@ -225,34 +221,150 @@ Happy path, sad path, and edge testing were considered and tested. When a reques
   Request Body:
   <pre>
     <code>
-{ data }
+{
+  "full_name": "Diana Puzzler",
+  "email": "d.puzzle@gmail.com",
+  "password": "PuzzleQueen1",
+  "password_confirmation": "PuzzleQueen1",
+  "zip_code": 12345, 
+  "phone_number": 5051230000
+}
     </code>
   </pre>
 
-  Response: 
-  <pre>
-    <code>
-{ data }
-    </code>
-  </pre>
-</details>
-
-<details>
-  <summary><code>GET "/api/v1/users/:id/loans"</code></summary>
-  Response
-  <pre>
-    <code>
-{ data }
-    </code>
-  </pre>
-</details>
-
-<details>
-  <summary><code>GET "/api/v1/users/:id/puzzles"</code></summary>
   Response:
+  <br>
+  Status: `201` 
+
   <pre>
     <code>
-{ data }
+{
+    "data": {
+        "id": "1",
+        "type": "user",
+        "attributes": {
+            "full_name": "Diana Puzzler",
+            "email": "d.puzzle@gmail.com",
+            "zip_code": 12345,
+            "phone_number": "(505) 123-0000"
+        }
+    }
+}
+    </code>
+  </pre>
+</details>
+
+<details>
+  <summary><code>POST "/api/v1/users/:id/login"</code></summary>
+    Request Body:
+  <pre>
+    <code>
+{
+  "email": "d.puzzle@gmail.com",
+  "password": "PuzzleQueen1"
+}
+    </code>
+  </pre>
+
+  Response:
+  <br>
+  Status: `201` 
+
+  <pre>
+    <code>
+{
+    "data": {
+        "id": "1",
+        "type": "user",
+        "attributes": {
+            "full_name": "Diana Puzzler",
+            "email": "d.puzzle@gmail.com",
+            "zip_code": 12345,
+            "phone_number": "(505) 123-0000"
+        }
+    }
+}
+    </code>
+  </pre>
+</details>
+
+<details>
+  <summary><code>DELETE "/api/v1/users/:id/logout"</code></summary>
+  Response:
+  <br>
+  Status: `204`
+</details>
+
+<details>
+  <summary><code>GET "/api/v1/users/:id"</code></summary>
+  Response:
+  <br>
+  Status: `200`
+  <pre>
+    <code>
+{
+    "data": {
+        "id": "1",
+        "type": "user",
+        "attributes": {
+            "full_name": "Diana Puzzler",
+            "email": "d.puzzle@gmail.com",
+            "zip_code": 12345,
+            "phone_number": "(505) 123-0000"
+        }
+    }
+}
+    </code>
+  </pre>
+</details>
+
+<details>
+  <summary><code>GET "/api/v1/users/:id/dashboard"</code></summary>
+  Response:
+  <br>
+  Status: `200`
+  <pre>
+    <code>
+{
+    "data": {
+        "id": "1",
+        "type": "dashboard",
+        "attributes": {
+            "user_info": {
+                "full_name": "Diana Puzzler",
+                "email": "d.puzzle@gmail.com",
+                "zip_code": 12345,
+                "phone_number": "(505) 123-0000"
+            },
+            "owner_loans": [
+                {
+                    "loan_id": 1,
+                    "owner_id": 1,
+                    "borrower_id": 2,
+                    "loan_status": "Pending",
+                    "loan_created_at": "2023-10-21T02:52:18.777Z",
+                    "puzzle_id": 1,
+                    "puzzle_image_url": "https://cloudinary.com/imageFlower_Cycle.jpg",
+                    "puzzle_title": "Flower Cycle",
+                    "puzzle_status": "Pending"
+                }, {...}
+            ],
+            "borrower_loans": [
+                {
+                    "loan_id": 5,
+                    "owner_id": 2,
+                    "borrower_id": 1,
+                    "loan_status": "Accepted",
+                    "loan_created_at": "2023-10-21T17:01:40.848Z",
+                    "puzzle_id": 55,
+                    "puzzle_image_url": "https://cloudinary.com/image/Maroon_Lake.jpg",
+                    "puzzle_title": "Maroon Lake",
+                    "puzzle_status": "Not Available"
+                }, {...}
+            ]
+        }
+    }
+}
     </code>
   </pre>
 </details>
@@ -262,14 +374,104 @@ Happy path, sad path, and edge testing were considered and tested. When a reques
   Request Body:
   <pre>
     <code>
-{ data }
+{
+    "title": "Wild Beauty",
+    "description": "Horses running in the snow by Chris Cummings.",
+    "total_pieces": 1000,
+    "notes": "Lots of white snow...beware!",
+    "puzzle_image_url": "https://cloudinary.com/image/Wild_Beauty.jpg"
+}
     </code>
   </pre>
 
-  Response: 
+  Response:
+  <br>
+  Status: `201` 
+
   <pre>
     <code>
-{ data }
+{
+    "data": {
+        "id": "3",
+        "type": "puzzle",
+        "attributes": {
+            "user_id": 1,
+            "status": "Available",
+            "title": "Wild Beauty",
+            "description": "Horses running in the snow by Chris Cummings.",
+            "total_pieces": 1000,
+            "notes": Lots of white snow...beware!",
+            "puzzle_image_url": "https://cloudinary.com/image/Wild_Beauty.jpg"
+        }
+    }
+}
+    </code>
+  </pre>
+</details>
+
+<details>
+  <summary><code>GET "/api/v1/users/:id/puzzles"</code></summary>
+  Response: 
+  <br>
+  Status: `200`
+  <pre>
+    <code>
+{
+    "data": [
+        {
+            "id": "4",
+            "type": "puzzle",
+            "attributes": {
+                "user_id": 1,
+                "status": "Available",
+                "title": "Humming Bird & Flowers",
+                "description": "Hummingbirds investigating some pretty flowers.",
+                "total_pieces": 1000,
+                "notes": "Not as hard as you might think!",
+                "puzzle_image_url": "https://res.cloudinary.com/image/info/Hummingbirds_Flowers.jpg"
+            }
+        },
+        {
+            "id": "5",
+            "type": "puzzle",
+            "attributes": {
+                "user_id": 1,
+                "status": "Available",
+                "title": "Durango Silverton",
+                "description": "Train coming around the bend!",
+                "total_pieces": 1000,
+                "notes": "Feels like a step back in time!",
+                "puzzle_image_url": "https://res.cloudinary.com/image/info/Durango_Silverton.jpg"
+            }
+        }, {...}
+    ]
+}
+    </code>
+  </pre>
+</details>
+
+<details>
+  <summary><code>GET "/api/v1/users/:id/puzzles/:id" </code></summary>
+  Response: 
+  <br>
+  Status: `200`
+  <pre>
+    <code>
+{
+    "data": {
+        "id": "1",
+        "type": "puzzle",
+        "attributes": {
+            "user_id": 1,
+            "status": "Available",
+            "title": "Flower Cycle",
+            "description": "A flower collage by Rosalind Wise",
+            "total_pieces": 1000,
+            "notes": "Very Difficult! Only for the brave of heart!",
+            "puzzle_image_url": "https://cloudinary.com/image/Flower_Cycle.jpg"
+        }
+    }
+}
     </code>
   </pre>
 </details>
@@ -279,24 +481,106 @@ Happy path, sad path, and edge testing were considered and tested. When a reques
   Request Body:
   <pre>
     <code>
-{ data }
+{
+  "status": 2, 
+  "title": "Rosalind Wise Flower Cycle", 
+  "description": "A colorful flower collage", 
+  "total_pieces": 2000,
+  "notes":  "Challenging but not too much. The brave of heart can do it!"
+}
     </code>
   </pre>
 
-  Response: 
+  Response:
+  <br>
+  Status: `200` 
+
   <pre>
     <code>
-{ data }
+{
+    "data": {
+        "id": "1",
+        "type": "puzzle",
+        "attributes": {
+            "user_id": 1,
+            "status": "Not Available",
+            "title": "Rosalind Wise Flower Cycle",
+            "description": "A colorful flower collage",
+            "total_pieces": 2000,
+            "notes": "Challenging but not too much. The brave of heart can do it!",
+            "puzzle_image_url": "https://res.cloudinary.com/image/info/Flower_Cycle.jpg"
+        }
+    }
+}
     </code>
   </pre>
 </details>
 
 <details>
-  <summary><code>DELETE "/api/v1/users/:id/puzzles/:id"</code></summary>
-  Response:
+  <summary><code>POST "/api/v1/users/:id/loans"</code></summary>
+  Request Body:
   <pre>
     <code>
-{ data }
+{
+    "borrower_id": 2, 
+    "puzzle_id": 2
+}
+    </code>
+  </pre>
+
+  Response:
+  <br>
+  Status: `201` 
+
+  <pre>
+    <code>
+{
+    "data": {
+        "id": "7",
+        "type": "loan",
+        "attributes": {
+            "owner_id": 1,
+            "borrower_id": 2,
+            "puzzle_id": 2,
+            "status": "Pending"
+        }
+    }
+}
+    </code>
+  </pre>
+</details>
+
+
+<details>
+  <summary><code>PATCH "/api/v1/users/:id/loans/:id"</code></summary>
+  owner clicks `accept` OR borrower clicks `withdraw` OR owner clicks `deny` OR when loan is `complete` 
+  Request Body:
+  <pre>
+    <code>
+{
+  "action_type": "accept"
+}
+    </code>
+  </pre>
+
+  Response:
+  <br>
+  Status: `200` 
+
+  <pre>
+    <code>
+{
+    "data": {
+        "id": "7",
+        "type": "loan",
+        "attributes": {
+            "owner_id": 1,
+            "borrower_id": 2,
+            "puzzle_id": 2,
+            "status": "Accepted"
+        }
+    }
+}
     </code>
   </pre>
 </details>

@@ -10,7 +10,7 @@
 
 <h3 align="center">The Missing Piece</h3>
   <p align="center">
-    A puzzle exhange app to get local retirees swapping puzzles to keep their minds sharp & meet others without the pressure of attending an event!
+    A puzzle exchange app to get local retirees swapping puzzles to keep their minds sharp & meet others without the pressure of attending an event!
     <hr>
     If you have a collection of puzzles and are eager for new challenges, you're in the right spot. Join our community of fellow puzzle enthusiasts and dive into a world of delightful exchanges. Happy Puzzle-ing!
   </p>
@@ -49,7 +49,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-   💜  [Production Website](link coming soon!)
+   💜  [Production Website](https://the-missing-piece.vercel.app/)
    <br>
    💜  [Backend Service](https://intense-peak-28151.herokuapp.com/)
    <br>
@@ -63,7 +63,7 @@
 
   **The Missing Piece** was created by an international team of both FrontEnd and BackEnd developers for the [Women Who Code (WWC) Hackathon for Social Good 2023](https://hopin.com/events/wwcode-hackathon-for-social-good/registration). 
   
-  The Women Who Code Hackathon for Social Good requires that every project aims to support a target group: The Missing Piece Team chose to to address is the emotional and mental wellbeing of retirees and seniors by creating an app to facilitate the sharing of items. For our MVP (minimum viable product) we chose to focus on one item type: puzzles.
+  The Women Who Code Hackathon for Social Good requires that every project aims to support a target group: The Missing Piece Team chose to address is the emotional and mental wellbeing of retirees and seniors by creating an app to facilitate the sharing of items. For our MVP (minimum viable product) we chose to focus on one item type: puzzles.
   
   Why puzzles? Well, puzzles tend to accumulate over a lifetime and end up in boxes in the attic, never to be seen again. They're purchased, completed a few times, and then put away. A puzzle is a type of item that can be exchanged and returned over and over... plus it's fun to work on new ones without having to buy yet another puzzle!
 
@@ -76,7 +76,7 @@
   - `Solution Statement`
     The Missing Piece aims to connect retirees through a common interest with an easy, low-pressure opportunity to share puzzles with other locals. Not only will this app encourage them get out of the house in order to swap puzzles with others but could hopefully lead to building genuine friendships with people in their local neighborhood. Who knows, maybe they'll start puzzle-parties and work together too!
 
-    On top of this, [studies](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5588550/) have shown that solving puzzles keep our minds sharp! It reduces the rate of cognitive decline and increases short-term memory, concentration, and visual-spatial reasoning. Plus, through the simple act of solving a little puzzle, improvements in mood and lower stress levels have been seen.
+    On top of this, [studies](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5588550/) have shown that solving puzzles keep our minds sharp! It reduces the rate of cognitive decline and increases short-term memory, concentration, and visual-spatial reasoning. Plus, through the simple act of solving a little puzzle, improvements in mood and lower stress-levels have been found.
 
     With the Missing Piece app, users can search for puzzles in their local area. Then they can sign up or login to see their dashboard where they'll be able to upload their own collection of puzzles, see who's requested to borrow a puzzle, and track their own requests to borrow. Once an owner of a puzzle accepts the request, both user's email and phone number are provided so they can coordate when and where to exchange the puzzle. Once a puzzle has been returned, it is then ready to be borrowed again!
 

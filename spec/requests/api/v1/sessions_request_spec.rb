@@ -19,7 +19,7 @@ RSpec.describe 'SessionsController' do
         }
 
         headers = { 'CONTENT_TYPE' => 'application/json' }
-        post "/api/v1/users/#{user.id}/login", headers:, params: JSON.generate(login_data)
+        post "/api/v1/login", headers:, params: JSON.generate(login_data)
 
         expect(response).to have_http_status(201)
         expect(session[:user_id]).to eq(user.id)
@@ -43,7 +43,7 @@ RSpec.describe 'SessionsController' do
         }
 
         headers = { 'CONTENT_TYPE' => 'application/json' }
-        post "/api/v1/users/#{user.id}/login", headers:, params: JSON.generate(login_data)
+        post "/api/v1/login", headers:, params: JSON.generate(login_data)
 
         expect(response).to have_http_status(401)
 
@@ -63,7 +63,7 @@ RSpec.describe 'SessionsController' do
         login_data = { email: user.email, password: user.password }
 
         headers = { 'CONTENT_TYPE' => 'application/json' }
-        post "/api/v1/users/#{user.id}/login", headers:, params: JSON.generate(login_data)
+        post "/api/v1/login", headers:, params: JSON.generate(login_data)
 
         expect(response).to have_http_status(201)
         expect(session[:user_id]).to eq(user.id)

@@ -258,7 +258,7 @@ Happy path and sad path testing were considered and tested. When a request canno
 </details>
 
 <details>
-  <summary><code>POST "/api/v1/users/:id/login"</code></summary>
+  <summary><code>POST "/api/v1/login"</code></summary>
     Request Body:
   <pre>
     <code>

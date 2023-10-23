@@ -6,17 +6,17 @@ RSpec.describe "PuzzlesController", type: :request do
   describe "#index" do
     context 'when successful' do
       it "returns all puzzles from a zipcode" do
-        zip_code = 12_345
+        zip_code = 12345
 
         user_1 = create(:user, id: 1, zip_code:)
         user_2 = create(:user, id: 2, zip_code:)
-        user_3 = create(:user, id: 3, zip_code: 54_321)
+        user_3 = create(:user, id: 3, zip_code: 54321)
         puzzle_1 = create(:puzzle, user: user_1)
         create(:puzzle, user: user_1)
         puzzle_3 = create(:puzzle, user: user_2)
         create(:puzzle, user: user_3)
 
-        zipcode_params = { zip_code: 12_345 }
+        zipcode_params = { zip_code: 12345 }
 
         headers = { 'CONTENT_TYPE' => 'application/json' }
         put "/api/v1/puzzles", headers:, params: JSON.generate(zipcode_params)
@@ -57,8 +57,8 @@ RSpec.describe "PuzzlesController", type: :request do
 
     context 'when NOT successful' do
       it 'returns an error message when zipcode is not found' do
-        user_1 = create(:user, id: 1, zip_code: 54_321)
-        user_2 = create(:user, id: 2, zip_code: 12_346)
+        user_1 = create(:user, id: 1, zip_code: 54321)
+        user_2 = create(:user, id: 2, zip_code: 12346)
         create(:puzzle, user: user_1)
         create(:puzzle, user: user_1)
         create(:puzzle, user: user_2)

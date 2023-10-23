@@ -33,8 +33,8 @@ RSpec.describe 'SessionsController' do
           password: "PuzzleQueen1",
           password_confirmation: "PuzzleQueen1",
           email: "dpuzzler@myemail.com",
-          zip_code: 12_345,
-          phone_number: 5_550_009_999
+          zip_code: 12345,
+          phone_number: 5550009999
         )
 
         login_data = {
@@ -76,7 +76,7 @@ RSpec.describe 'SessionsController' do
     end
 
     context 'when NOT successful' do
-      #Unsure how to test this:
+      # Unsure how to test this:
 
       # it 'cannot delete a user session of another user' do
       #   user = create(:user)

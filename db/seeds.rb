@@ -8,16 +8,18 @@
 require 'faker'
 
 # Create users
+zip_code_options = [12345, 54321, 10101, 55055]
+
 10.times do
   password = Faker::Alphanumeric.alphanumeric(number: 10, min_alpha: 3, min_numeric: 3)
 
   User.create(
     full_name: Faker::Name.name,
-    password:,
+    password: password,
     password_confirmation: password,
     email: Faker::Internet.email,
-    zip_code: Faker::Address.zip_code,
-    phone_number: Faker::PhoneNumber.phone_number
+    zip_code: zip_code_options.sample,
+    phone_number: "(#{Faker::Number.number(digits: 3)}) #{Faker::Number.number(digits: 3)}-#{Faker::Number.number(digits: 4)}"
   )
 end
 

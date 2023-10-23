@@ -14,6 +14,7 @@ FactoryBot.define do
 
     # We are using US examples for the MVP: this will need to change for international usage
     # We format all phone numbers before saving them in the database
+    # phone_number { Faker::Number.number(digits: 10) }
     phone_number { "(#{Faker::Number.number(digits: 3)}) #{Faker::Number.number(digits: 3)}-#{Faker::Number.number(digits: 4)}" }
 
     # Decided not to use this and go with an icon on the FE repo

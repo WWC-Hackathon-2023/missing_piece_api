@@ -9,11 +9,11 @@
     <img src=".github/the_missing_piece_logo.png" alt="Logo" width="200" height="200">
   </a>
 
-<h3 align="center">Welcome to The Missing Piece</h3>
+<h3 align="center">The Missing Piece</h3>
   <p align="center">
-    Add motto here.
+    A puzzle exhange app to get local retirees swapping puzzles to keep their minds sharp & meet others without the pressure of attending an event!
     <hr>
-    Add short summary here.
+    If you have a collection of puzzles and you're eager to swap them for new challenges, you're in the right spot. Join our community of fellow puzzle enthusiasts and dive into a world of delightful exchanges. Happy Puzzle-ing!
   </p>
 </div>
 <hr>
@@ -26,6 +26,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#hackathon">Women Who Code Hackathon for Social Good</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -51,20 +52,31 @@
 
    💜  [Production Website](add link)
    <br>
-   💜  [Backend Service](add link)
+   💜  [Backend Service](https://intense-peak-28151.herokuapp.com/)
    <br>
-   💜  [Front End Repository](add link)
+   💜  [Front End Repository](https://github.com/WWC-Hackathon-2023/the_missing_piece_fe)
    <br>
-   <!-- * [Video Presentation]() -->
+   <!-- * [Video/Slide Presentation]() -->
 
 
-  **The Missing Piece** was created by an international team of both FrontEnd and BackEnd developers for the **Women Who Code (WWC) Hackathon for Social Good 2023**.(add link)
+<!-- WWC Hackathon -->
+### Women Who Code Hackathon for Social Good
 
-  The mission of **The Missing Piece** Add details here
-  - Challenge Statement
-  - Solution Statement
+  **The Missing Piece** was created by an international team of both FrontEnd and BackEnd developers for the [Women Who Code (WWC) Hackathon for Social Good 2023](https://hopin.com/events/wwcode-hackathon-for-social-good/registration).
 
-  Users simply....(add overview of how users use the app)
+  The Social Good that **The Missing Piece** addresses is the wellbeing of retirees and seniors. 
+  - `Challenge Statement`
+
+    According to the National Institute of Health, prior to the COVID outbreak, investigators found out that 24% of American individuals 65 and over were socially isolated. That's approximately 7.7 million people. The U.S. Health and Retirement Study reports that 43% of Americans aged 60 or older also reported feeling lonely, which can lead to debilitating issues like depression and anxiety for our loved ones... now think about this on a global scale! [ref](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7437541/) 
+
+    In an already isolated world, how do we use technology to connect our beloved elders through a common interest that is simple to use and can lead to actual genuine connections? By joining the Missing Piece!
+  
+  - `Solution Statement`
+    The Missing Piece aims to connect retirees through a common interest with an easy, low-pressure opportunity to share puzzles with other locals. Not only will this app encourage them get out of the house in order to swap puzzles with others but could hopefully lead to building genuine friendships with people in their local neighborhood. Who knows, maybe they'll start puzzle-parties and work together too!
+
+    On top of this, [studies](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5588550/) have shown that solving puzzles keep our minds sharp! It reduces the rate of cognitive decline and increases short-term memory, concentration, and visual-spatial reasoning. Plus, through the simple act of solving a little puzzle, improvements in mood and lower stress levels have been seen.
+
+    With the Missing Piece app, users can search for puzzles in their local area. Then they can sign up or login to see their dashboard where they'll be able to upload their own collection of puzzles, see who's requested to borrow a puzzle, and track their own requests to borrow. Once an owner of a puzzle accepts the request, both user's email and phone number are provided so they can coordate when and where to exchange the puzzle. Once a puzzle has been returned, it is then ready to be borrowed again!
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

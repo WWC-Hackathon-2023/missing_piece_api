@@ -142,8 +142,8 @@ RSpec.describe 'UsersController' do
           password: "puzzles4fun",
           password_confirmation: "puzzles4fun",
           email: "nancy@my_email.com",
-          zip_code: 12_345,
-          phone_number: 5_553_039_999
+          zip_code: 12345,
+          phone_number: 5553039999
         }
 
         headers = { 'CONTENT_TYPE' => 'application/json' }

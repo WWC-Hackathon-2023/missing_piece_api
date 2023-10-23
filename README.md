@@ -1,4 +1,3 @@
-
 <!-- ReadMe -->
 <a id="readme-top"></a>
 
@@ -26,7 +25,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#hackathon">Women Who Code Hackathon for Social Good</a></li>
+        <li><a href="#hackathon">Women Who Code Hackathon for Social Good 2023</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -50,17 +49,17 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-   💜  [Production Website](add link)
+   💜  [Production Website](link coming soon!)
    <br>
    💜  [Backend Service](https://intense-peak-28151.herokuapp.com/)
    <br>
    💜  [Front End Repository](https://github.com/WWC-Hackathon-2023/the_missing_piece_fe)
    <br>
-   <!-- * [Video/Slide Presentation]() -->
 
+   <!-- * If there is a [Video/Slide Presentation]() place it here-->
 
 <!-- WWC Hackathon -->
-### Women Who Code Hackathon for Social Good
+### Women Who Code Hackathon for Social Good 2023
 
   **The Missing Piece** was created by an international team of both FrontEnd and BackEnd developers for the [Women Who Code (WWC) Hackathon for Social Good 2023](https://hopin.com/events/wwcode-hackathon-for-social-good/registration). 
   
@@ -626,7 +625,7 @@ Happy path and sad path testing were considered and tested. When a request canno
 <details>
   <summary>Refactor/Changes</summary>
   <dl>
-    <dt>Conduct a solid refactor of exsisting code</dt>
+    <dt>Conduct a solid refactor of existing code</dt>
       <dd>- With the limited time of the Hackathon, reviewing the code slower would be first</dd>
     <dt>Allow a loan to have more than one puzzle</dt>
       <dd>- This was the original idea for the schema and would involve a join table</dd>
@@ -634,7 +633,7 @@ Happy path and sad path testing were considered and tested. When a request canno
       <dd>- This would possibly require an new table to store puzzle image urls</dd>
     <dt>Include other item types that could be borrowed</dt>
       <dd>- Deciding which other item types might be most suited for this app</dd>
-      <dd>- And we'd create more tables! Oh-la-la!</dd>
+      <dd>- And we'd create even more tables in the database</dd>
     <dt>Incorporate internal communication tools</dt>
       <dd>- Internal or external emails and/or text messages might be concidered</dd>
       <dd>- If so we'd look to Twilio/Send Grid as a start</dd>

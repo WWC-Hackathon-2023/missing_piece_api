@@ -63,7 +63,7 @@ RSpec.describe 'Users/LoansController' do
       it 'returns an error message if trying to make a loan when a Puzzle status is Pending' do
         user_1 = create(:user, id: 1)
         user_2 = create(:user, id: 2)
-        puzzle_1 = create(:puzzle, user: user_1, status: 1) #Puzzle status 1 = "Pending"
+        puzzle_1 = create(:puzzle, user: user_1, status: 1) # Puzzle status 1 = "Pending"
 
         post "/api/v1/users/#{user_1.id}/loans", params: {
           puzzle_id: puzzle_1.id,
@@ -82,7 +82,7 @@ RSpec.describe 'Users/LoansController' do
       it 'returns an error message if trying to make a loan when a Puzzle status is Not Available' do
         user_1 = create(:user, id: 1)
         user_2 = create(:user, id: 2)
-        puzzle_1 = create(:puzzle, user: user_1, status: 2) #Puzzle status 2 = "Not Available"
+        puzzle_1 = create(:puzzle, user: user_1, status: 2) # Puzzle status 2 = "Not Available"
 
         post "/api/v1/users/#{user_1.id}/loans", params: {
           puzzle_id: puzzle_1.id,
@@ -114,12 +114,12 @@ RSpec.describe 'Users/LoansController' do
       headers = { 'CONTENT_TYPE' => 'application/json' }
       post "/api/v1/users/#{@user_1.id}/loans", headers:, params: JSON.generate(loan_request)
       
-     @current_loan = Loan.last
+      @current_loan = Loan.last
     end
 
     context "when successful" do
       #REFACTOR: the following tests test both the puzzle status and the loan status changes
-      
+
       it 'updates loan status to Accepted when loan action type is Accept' do
         expect(@current_loan.puzzle.status).to eq("Pending")
 

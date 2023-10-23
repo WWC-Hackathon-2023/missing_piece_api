@@ -10,9 +10,9 @@
 
 <h3 align="center">The Missing Piece</h3>
   <p align="center">
-    A puzzle exchange app to get local retirees swapping puzzles to keep their minds sharp & meet others without the pressure of attending an event!
+    Together we can create a better world. One individual piece at a time.
     <hr>
-    If you have a collection of puzzles and are eager for new challenges, you're in the right spot. Join our community of fellow puzzle enthusiasts and dive into a world of delightful exchanges. Happy Puzzle-ing!
+    An item exchange app to get local retirees swapping puzzles to keep their minds sharp & meet others without the pressure of attending an event! If you have a collection of puzzles and are eager for new challenges, you're in the right spot. Join our community of fellow puzzle enthusiasts and dive into a world of delightful exchanges. Happy Puzzle-ing!
   </p>
 </div>
 <hr>
@@ -55,6 +55,8 @@
    <br>
    💜  [Front End Repository](https://github.com/WWC-Hackathon-2023/the_missing_piece_fe)
    <br>
+  💜  [Submission Presentation](https://docs.google.com/presentation/d/1W5eRt6h0T-LZnvkvZk0-hhx0Bpl9phPM2FUCNlU67ro/edit?usp=sharing)
+  <br>
 
    <!-- * If there is a [Video/Slide Presentation]() place it here-->
 

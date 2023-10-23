@@ -595,6 +595,8 @@ Happy path and sad path testing were considered and tested. When a request canno
 </details>
 <br>
 
+All endpoints can also be found in the [JSON Contract](https://gist.github.com/MelTravelz/8983a104ca5c4e822dedb8d5e1c42622) 
+
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.postman.com/advanced-language-practices/workspace/missing-piece/collection/26102509-8083c615-1962-4375-be58-d0d124c35756?action=share&creator=26102509)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

@@ -12,7 +12,7 @@
   <p align="center">
     Together we can create a better world. One individual piece at a time. 
     <hr>
-    An item exchange app to get local retirees swapping puzzles to keep their minds sharp & meet others without the pressure of attending an event! So if you have a collection of puzzles and are eager for new challenges, you're in the right spot: Join our community of fellow puzzle enthusiasts and dive into a world of delightful exchanges. Happy Puzzle-ing!
+    An item exchange app to get local retirees swapping puzzles to keep their minds sharp & meet others in their local neighborhood. So if you have a collection of puzzles and are eager for new challenges, you're in the right spot: Join our community of fellow puzzle enthusiasts and dive into a world of delightful exchanges. Happy Puzzle-ing!
   </p>
 </div>
 <hr>
@@ -73,10 +73,10 @@
 
     According to the National Institute of Health, prior to the COVID outbreak, investigators found out that 24% of American individuals 65 and over were socially isolated. That's approximately 7.7 million people. The U.S. Health and Retirement Study reports that 43% of Americans aged 60 or older also reported feeling lonely, which can lead to debilitating issues like depression and anxiety for our loved ones... now think about this on a global scale! [ref](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7437541/) 
 
-    In an already isolated world, how do we use technology to connect our beloved elders through a common interest that is simple to use and can lead to actual genuine connections? By joining the Missing Piece!
+    In an already isolated world, how do we use technology to connect our seniors through a common interest that is simple to use and can lead to actual genuine connections? By joining the Missing Piece!
   
   - `Solution Statement`
-    The Missing Piece aims to connect retirees through a common interest with an easy, low-pressure opportunity to share puzzles with other locals. Not only will this app encourage them get out of the house in order to swap puzzles with others but could hopefully lead to building genuine friendships with people in their local neighborhood. Who knows, maybe they'll start puzzle-parties and work together too!
+    The Missing Piece aims to connect retirees through a common interest with an easy, low-pressure opportunity to share puzzles with other locals (without the pressure of attending an event). Not only will this app encourage them get out of the house in order to swap puzzles with others but could hopefully lead to building genuine friendships with people in their local neighborhood. Who knows, maybe they'll start puzzle-parties and work together too!
 
     On top of this, [studies](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5588550/) have shown that solving puzzles keep our minds sharp! It reduces the rate of cognitive decline and increases short-term memory, concentration, and visual-spatial reasoning. Plus, through the simple act of solving a little puzzle, improvements in mood and lower stress-levels have been found.
 
@@ -97,7 +97,6 @@
 ![GitHubActions](https://img.shields.io/badge/GitHub%20Actions-2088FF.svg?style=for-the-badge&logo=GitHub-Actions&logoColor=white)
 ![Postman](https://img.shields.io/badge/Postman-FF6C37.svg?style=for-the-badge&logo=Postman&logoColor=white)
 ![Cloudinary](https://img.shields.io/badge/Cloudinary-2C39BD.svg?style=for-the-badge&logo=iCloud&logoColor=white)
-![1Password](https://img.shields.io/badge/1Password-1A285F.svg?style=for-the-badge&logo=1Password&logoColor=white)
 ![Notion](https://img.shields.io/badge/Notion-EAEAEA.svg?style=for-the-badge&logo=Notion&logoColor=black)
 ![Miro](https://img.shields.io/badge/Miro-FFCD11.svg?style=for-the-badge&logo=Miro&logoColor=black)
 ![Figma](https://img.shields.io/badge/Figma-8669AE.svg?style=for-the-badge&logo=Figma&logoColor=white)
@@ -612,14 +611,22 @@ All endpoints can also be found in the [JSON Contract](https://gist.github.com/M
 <!-- Technologies Used -->
 <h2 id="technologies">New Technologies Used</h2>
 
-![1Password](https://img.shields.io/badge/1Password-1A285F.svg?style=for-the-badge&logo=1Password&logoColor=white)
-
-[Passage by 1Password](https://passage.1password.com/) was used to authenticate users and ensure login was easy, safe, and quick.
-<br><br>
-
 ![Cloudinary](https://img.shields.io/badge/Cloudinary-2C39BD.svg?style=for-the-badge&logo=iCloud&logoColor=white)
 
 [Cloudinary](https://cloudinary.com/) was used to allow users to seamlessly upload images for their puzzles.
+<br><br>
+
+## Attempted New Technologies
+
+![AWS S3](https://img.shields.io/badge/Amazon%20S3-FF9900.svg?style=for-the-badge&logo=Amazon-S3&logoColor=white)
+
+[Amazon Web Services s3 Bucket](https://aws.amazon.com/s3/) was attempted for image upload/cloud storage.
+<br><br>
+
+![1Password](https://img.shields.io/badge/1Password-1A285F.svg?style=for-the-badge&logo=1Password&logoColor=white)
+
+[Passage by 1Password](https://passage.1password.com/) was attempted to authenticate users and ensure login was easy, safe, and quick.
+<br><br>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

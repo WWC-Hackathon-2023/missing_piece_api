@@ -127,7 +127,7 @@ If you'd like to demo this API on your local machine:
 ### Schema
 
 <div align="center">
-  <img src=".github/missing_piece_schema.jpg" alt="Missing Piece Schema">
+  <img src=".github/schema_missing_piece_final.png" alt="Missing Piece Schema">
 </div>
 
 <!-- Testing -->

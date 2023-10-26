@@ -181,6 +181,35 @@ RSpec.describe 'Users/PuzzlesController' do
         expect(parsed_data[:data][:attributes][:total_pieces]).to_not eq(@puzzle_2.total_pieces)
         expect(parsed_data[:data][:attributes][:notes]).to_not eq(@puzzle_2.notes)
       end
+
+      it 'changes a single puzzles status to 3="Permanently Removed"' do
+        puzzle_update = {
+          status: 3 # FE will send us an enum digit
+        }
+
+        headers = { 'CONTENT_TYPE' => 'application/json' }
+        patch "/api/v1/users/#{@user_1.id}/puzzles/#{@puzzle_2.id}", headers:, params: JSON.generate(puzzle_update)
+
+        expect(response).to have_http_status(200)
+
+        parsed_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(parsed_data).to be_a(Hash)
+        expect(parsed_data.keys).to eq([:data])
+        expect(parsed_data[:data]).to be_a(Hash)
+        expect(parsed_data[:data].keys).to eq([:id, :type, :attributes])
+
+        expect(parsed_data[:data][:attributes]).to be_a(Hash)
+        expect(parsed_data[:data][:attributes].keys).to eq([:user_id, :status, :title, :description, :total_pieces, :notes, :puzzle_image_url])
+        expect(parsed_data[:data][:attributes][:user_id]).to eq(@puzzle_2.user_id)
+        expect(parsed_data[:data][:attributes][:status]).to eq("Permanently Removed") # this was the only attribute updated
+        expect(parsed_data[:data][:attributes][:title]).to eq(@puzzle_2.title)
+        expect(parsed_data[:data][:attributes][:description]).to eq(@puzzle_2.description)
+        expect(parsed_data[:data][:attributes][:total_pieces]).to eq(@puzzle_2.total_pieces)
+        expect(parsed_data[:data][:attributes][:notes]).to eq(@puzzle_2.notes)
+
+        expect(parsed_data[:data][:attributes][:status]).to_not eq(@puzzle_2.status)
+      end
     end
 
     context "when NOT successful" do

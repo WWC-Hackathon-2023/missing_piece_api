@@ -7,7 +7,8 @@ class Api::V1::PuzzlesController < ApplicationController
 
     if users != []
       puzzles = Puzzle.where(user_id: users.pluck(:id))
-      render json: PuzzleSerializer.new(puzzles)
+      current_puzzles = puzzles.where.not(status: 3)
+      render json: PuzzleSerializer.new(current_puzzles)
     elsif puzzles == [] || users == []
       render json: { error: "Puzzles not found in this area" }, status: "404"
     end

@@ -53,6 +53,37 @@ RSpec.describe "PuzzlesController", type: :request do
         expect(parsed_data[:data][2][:attributes][:notes]).to eq(puzzle_3.notes)
         expect(parsed_data[:data][2][:attributes][:puzzle_image_url]).to eq(puzzle_3.puzzle_image_url)
       end
+
+      it "does not return any puzzles with a status 3='Permanently Removed' from a zipcode" do
+        zip_code = 12345
+
+        user_1 = create(:user, id: 1, zip_code:)
+        user_2 = create(:user, id: 2, zip_code:)
+        user_3 = create(:user, id: 3, zip_code: 54321)
+        puzzle_1 = create(:puzzle, user: user_1)
+        puzzle_2 = create(:puzzle, user: user_1, status: 3) # This will NOT be returned since it is 'Permanently Removed'
+        puzzle_3 = create(:puzzle, user: user_2)
+
+        zipcode_params = { zip_code: 12345 }
+
+        headers = { 'CONTENT_TYPE' => 'application/json' }
+        put "/api/v1/puzzles", headers:, params: JSON.generate(zipcode_params)
+
+        expect(response).to have_http_status(200)
+
+        parsed_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(parsed_data).to be_a(Hash)
+        expect(parsed_data.keys).to eq([:data])
+        expect(parsed_data[:data]).to be_an(Array)
+        expect(parsed_data[:data][0]).to be_a(Hash)
+        expect(parsed_data[:data][0].keys).to eq([:id, :type, :attributes])
+        expect(parsed_data[:data][0][:attributes].keys).to eq([:user_id, :status, :title, :description, :total_pieces, :notes, :puzzle_image_url])
+
+        expect(parsed_data[:data].size).to eq(2)
+        expect(parsed_data[:data][0][:attributes][:user_id]).to eq(puzzle_1.user_id)
+        expect(parsed_data[:data][1][:attributes][:user_id]).to eq(puzzle_3.user_id)
+      end
     end
 
     context 'when NOT successful' do

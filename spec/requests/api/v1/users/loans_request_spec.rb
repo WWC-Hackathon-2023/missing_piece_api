@@ -97,6 +97,25 @@ RSpec.describe 'Users/LoansController' do
         expect(parsed_error_data.keys).to eq([:error])
         expect(parsed_error_data[:error]).to eq("Puzzle is not available for loan.")
       end
+
+      it 'returns an error message if trying to make a loan when a Puzzle status is Permanently Removed' do
+        user_1 = create(:user, id: 1)
+        user_2 = create(:user, id: 2)
+        puzzle_1 = create(:puzzle, user: user_1, status: 3) # Puzzle status 3 = "Permanently Removed"
+
+        post "/api/v1/users/#{user_1.id}/loans", params: {
+          puzzle_id: puzzle_1.id,
+          borrower_id: user_2.id
+        }
+
+        expect(response).to have_http_status(422)
+
+        parsed_error_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(parsed_error_data).to be_a(Hash)
+        expect(parsed_error_data.keys).to eq([:error])
+        expect(parsed_error_data[:error]).to eq("Puzzle is not available for loan.")
+      end
     end
   end
 

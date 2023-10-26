@@ -15,6 +15,6 @@ RSpec.describe Puzzle, type: :model do
     it { should validate_numericality_of :total_pieces }
     it { should validate_presence_of :puzzle_image_url }
 
-    it { should define_enum_for(:status).with_values(["Available", "Pending", "Not Available"]) }
+    it { should define_enum_for(:status).with_values(["Available", "Pending", "Not Available", "Permanently Removed"]) }
   end
 end

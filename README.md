@@ -80,7 +80,7 @@
 
     On top of this, [studies](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5588550/) have shown that solving puzzles keep our minds sharp! It reduces the rate of cognitive decline and increases short-term memory, concentration, and visual-spatial reasoning. Plus, through the simple act of solving a little puzzle, improvements in mood and lower stress-levels have been found.
 
-    With the Missing Piece app, users can search for puzzles in their local area. Then they can sign up or login to see their dashboard where they'll be able to upload their own collection of puzzles, see who's requested to borrow a puzzle, and track their own requests to borrow. Once an owner of a puzzle accepts the request, both user's email and phone number are provided so they can coordate when and where to exchange the puzzle. Once a puzzle has been returned, it is then ready to be borrowed again!
+    With the Missing Piece app, users can search for puzzles in their local area. Then they can sign up or login to see their dashboard where they'll be able to upload their own collection of puzzles, see who's requested to borrow a puzzle, and track their own requests to borrow. Once an owner of a puzzle accepts the request, both user's email and phone number are provided so they can coordinate when and where to exchange the puzzle. Once a puzzle has been returned, it is then ready to be borrowed again!
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

@@ -43,7 +43,7 @@ class Api::V1::Users::LoansController < ApplicationController
   end
 
   def check_puzzle_status
-      render json: { error: "Puzzle is not available for loan." }, status: :unprocessable_entity if @puzzle.status != "Available"
+    raise PuzzleNotAvailableException unless @puzzle.status == "Available"
   end
 
   def find_loan

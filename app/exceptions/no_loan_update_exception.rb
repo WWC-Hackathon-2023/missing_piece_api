@@ -1,0 +1,2 @@
+class NoLoanUpdateException < StandardError
+end

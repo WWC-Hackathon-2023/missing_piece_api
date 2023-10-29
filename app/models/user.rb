@@ -11,8 +11,9 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  def format_phone_number
-    phone_number.insert(0, '(').insert(4, ')').insert(5, " ").insert(9, "-")
+  def format_attributes
+    self.email = format_email
+    self.phone_number = format_phone_number
   end
 
   # This method needs a HUGE refactor:
@@ -63,5 +64,15 @@ class User < ApplicationRecord
     end
 
     OpenStruct.new(dashboard_info)
+  end
+
+  private
+
+  def format_email
+    email.downcase
+  end
+
+  def format_phone_number
+    phone_number.insert(0, '(').insert(4, ')').insert(5, " ").insert(9, "-")
   end
 end

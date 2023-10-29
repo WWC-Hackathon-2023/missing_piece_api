@@ -11,27 +11,8 @@ class Api::V1::Users::LoansController < ApplicationController
   end
 
   def update
-    # loan = Loan.find(params[:loan_id])
-
-    if params[:action_type] == 'accept'
-      @loan.update(status: 1)
-      @loan.puzzle.update(status: 2)
-      render json: LoanSerializer.new(@loan), status: 200 
-    elsif params[:action_type] == 'withdraw'
-      @loan.update(status: 2)
-      @loan.puzzle.update(status: 0)
-      render json: LoanSerializer.new(@loan), status: 200 
-    elsif params[:action_type] == 'deny' 
-      @loan.update(status: 2)
-      @loan.puzzle.update(status: 2)
-      render json: LoanSerializer.new(@loan), status: 200
-    elsif params[:action_type] == 'close'
-      @loan.update(status: 3)
-      @loan.puzzle.update(status: 0)
-      render json: LoanSerializer.new(@loan), status: 200 
-    else
-      render json: { error: "Unable to update loan status" }, status: 422
-    end
+    updated_loan = @loan.update_status_and_puzzle_status(params[:action_type])
+    render json: LoanSerializer.new(updated_loan), status: 200
   end
 
   private

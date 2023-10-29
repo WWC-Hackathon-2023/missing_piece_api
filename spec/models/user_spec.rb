@@ -18,6 +18,24 @@ RSpec.describe User, type: :model do
   end
 
   describe "instance methods" do
+    describe "#format_attributes" do
+      it "can format the email & phone number attributes of a user" do
+        user = User.create(
+          full_name: "Diana Puzzler",
+          password: "PuzzleQueen1",
+          password_confirmation: "PuzzleQueen1",
+          email: "DpuZZler@My-Email.coM",
+          zip_code: 12345,
+          phone_number: "1011110000"
+        )
+
+        user.format_attributes
+
+        expect(user.email).to eq("dpuzzler@my-email.com")
+        expect(user.phone_number).to eq("(101) 111-0000")
+      end
+    end
+
     describe "#find_dashboard_info" do
       before(:each) do
         @user_1 = create(:user, id: 1)

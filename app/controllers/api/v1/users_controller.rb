@@ -1,10 +1,12 @@
 class Api::V1::UsersController < ApplicationController
+  before_action :find_user, only: [:show, :dashboard]
+
   def show
-    render json: UserSerializer.new(User.find(params[:user_id]))
+    render json: UserSerializer.new(@user)
   end
 
   def dashboard
-    dashboard = User.find(params[:user_id]).find_dashboard_info
+    dashboard = @user.find_dashboard_info
     render json: DashboardSerializer.new(dashboard)
   end
 
@@ -22,5 +24,9 @@ class Api::V1::UsersController < ApplicationController
 
   def user_params
     params.permit(:full_name, :password, :password_confirmation, :email, :zip_code, :phone_number)
+  end
+
+  def find_user
+    @user = User.find(params[:user_id])
   end
 end

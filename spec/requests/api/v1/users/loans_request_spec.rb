@@ -245,70 +245,76 @@ RSpec.describe 'Users/LoansController' do
     end
 
     context "when successful" do
-      #REFACTOR: the following tests test both the puzzle status and the loan status changes
+      context "when loan action_type is accept" do
+        it 'updates loan status to Accepted & puzzle status to Not Available' do
+          expect(@current_loan.puzzle.status).to eq("Pending")
 
-      it 'updates loan status to Accepted when loan action type is Accept' do
-        expect(@current_loan.puzzle.status).to eq("Pending")
+          loan_update = { action_type: "accept" }
 
-        loan_update = { action_type: "accept" }
+          headers = { 'CONTENT_TYPE' => 'application/json' }
+          patch "/api/v1/users/#{@user_1.id}/loans/#{@current_loan.id}", headers:, params: JSON.generate(loan_update)
 
-        headers = { 'CONTENT_TYPE' => 'application/json' }
-        patch "/api/v1/users/#{@user_1.id}/loans/#{@current_loan.id}", headers:, params: JSON.generate(loan_update)
+          @current_loan.reload
+          expect(@current_loan.puzzle.status).to eq("Not Available")
 
-        @current_loan.reload
-        expect(@current_loan.puzzle.status).to eq("Not Available")
-
-        expect(response).to have_http_status(200)
-        parsed_data = JSON.parse(response.body, symbolize_names: true)
-        expect(parsed_data[:data][:attributes][:status]).to eq("Accepted")
+          expect(response).to have_http_status(200)
+          parsed_data = JSON.parse(response.body, symbolize_names: true)
+          expect(parsed_data[:data][:attributes][:status]).to eq("Accepted")
+        end
       end
 
-      it 'updates loan status to Cancelled when loan action type is Withdraw' do
-        expect(@current_loan.puzzle.status).to eq("Pending")
+      context "when loan action_type is withdraw" do
+        it 'updates loan status to Cancelled & puzzle status to Available' do
+          expect(@current_loan.puzzle.status).to eq("Pending")
 
-        loan_update = { action_type: "withdraw" }
+          loan_update = { action_type: "withdraw" }
 
-        headers = { 'CONTENT_TYPE' => 'application/json' }
-        patch "/api/v1/users/#{@user_1.id}/loans/#{@current_loan.id}", headers:, params: JSON.generate(loan_update)
+          headers = { 'CONTENT_TYPE' => 'application/json' }
+          patch "/api/v1/users/#{@user_1.id}/loans/#{@current_loan.id}", headers:, params: JSON.generate(loan_update)
 
-        @current_loan.reload
-        expect(@current_loan.puzzle.status).to eq("Available")
+          @current_loan.reload
+          expect(@current_loan.puzzle.status).to eq("Available")
 
-        expect(response).to have_http_status(200)
-        parsed_data = JSON.parse(response.body, symbolize_names: true)
-        expect(parsed_data[:data][:attributes][:status]).to eq("Cancelled")
+          expect(response).to have_http_status(200)
+          parsed_data = JSON.parse(response.body, symbolize_names: true)
+          expect(parsed_data[:data][:attributes][:status]).to eq("Cancelled")
+        end
       end
 
-      it 'updates loan status to Cancelled when loan action type is Deny' do
-        expect(@current_loan.puzzle.status).to eq("Pending")
+      context "when loan action_type is deny" do
+        it 'updates loan status to Cancelled & puzzle status to Not Available' do
+          expect(@current_loan.puzzle.status).to eq("Pending")
 
-        loan_update = { action_type: "deny" }
+          loan_update = { action_type: "deny" }
 
-        headers = { 'CONTENT_TYPE' => 'application/json' }
-        patch "/api/v1/users/#{@user_1.id}/loans/#{@current_loan.id}", headers:, params: JSON.generate(loan_update)
+          headers = { 'CONTENT_TYPE' => 'application/json' }
+          patch "/api/v1/users/#{@user_1.id}/loans/#{@current_loan.id}", headers:, params: JSON.generate(loan_update)
 
-        @current_loan.reload
-        expect(@current_loan.puzzle.status).to eq("Not Available")
+          @current_loan.reload
+          expect(@current_loan.puzzle.status).to eq("Not Available")
 
-        expect(response).to have_http_status(200)
-        parsed_data = JSON.parse(response.body, symbolize_names: true)
-        expect(parsed_data[:data][:attributes][:status]).to eq("Cancelled")
+          expect(response).to have_http_status(200)
+          parsed_data = JSON.parse(response.body, symbolize_names: true)
+          expect(parsed_data[:data][:attributes][:status]).to eq("Cancelled")
+        end
       end
 
-      it 'updates loan status to Closed when loan action type is Close' do
-        expect(@current_loan.puzzle.status).to eq("Pending")
+      context "when loan action_type is close" do
+        it 'updates loan status to Closed & puzzle status to Available' do
+          expect(@current_loan.puzzle.status).to eq("Pending")
 
-        loan_update = { action_type: "close" }
+          loan_update = { action_type: "close" }
 
-        headers = { 'CONTENT_TYPE' => 'application/json' }
-        patch "/api/v1/users/#{@user_1.id}/loans/#{@current_loan.id}", headers:, params: JSON.generate(loan_update)
+          headers = { 'CONTENT_TYPE' => 'application/json' }
+          patch "/api/v1/users/#{@user_1.id}/loans/#{@current_loan.id}", headers:, params: JSON.generate(loan_update)
 
-        @current_loan.reload
-        expect(@current_loan.puzzle.status).to eq("Available")
+          @current_loan.reload
+          expect(@current_loan.puzzle.status).to eq("Available")
 
-        expect(response).to have_http_status(200)
-        parsed_data = JSON.parse(response.body, symbolize_names: true)
-        expect(parsed_data[:data][:attributes][:status]).to eq("Closed")
+          expect(response).to have_http_status(200)
+          parsed_data = JSON.parse(response.body, symbolize_names: true)
+          expect(parsed_data[:data][:attributes][:status]).to eq("Closed")
+        end
       end
     end
 

@@ -1,7 +1,0 @@
-class NoPuzzlesException < StandardError
-end
-
-
-
-
-

@@ -1,0 +1,2 @@
+class PuzzleNotAvailableException < StandardError
+end

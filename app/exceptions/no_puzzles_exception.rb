@@ -1,0 +1,7 @@
+class NoPuzzlesException < StandardError
+end
+
+
+
+
+

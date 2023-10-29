@@ -2,15 +2,12 @@ class Api::V1::PuzzlesController < ApplicationController
   skip_before_action :set_current_user, only: [:index]
 
   def index
-    zip_code = params[:zip_code]
-    users = User.where(zip_code:) if zip_code.present?
+    puzzles_in_zip_code = Puzzle.find_by_zip_code(params[:zip_code])
 
-    if users != []
-      puzzles = Puzzle.where(user_id: users.pluck(:id))
-      current_puzzles = puzzles.where.not(status: 3)
-      render json: PuzzleSerializer.new(current_puzzles)
-    elsif puzzles == [] || users == []
-      render json: { error: "Puzzles not found in this area" }, status: "404"
+    if puzzles_in_zip_code.any?
+      render json: PuzzleSerializer.new(puzzles_in_zip_code)
+    else
+      raise NoPuzzlesException
     end
   end
 end

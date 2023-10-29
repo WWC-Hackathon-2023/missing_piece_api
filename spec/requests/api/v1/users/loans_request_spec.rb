@@ -175,7 +175,7 @@ RSpec.describe 'Users/LoansController' do
         expect(parsed_error_data[:errors][0]).to be_a(Hash)
         expect(parsed_error_data[:errors][0].keys).to eq([:status, :title, :detail])
         expect(parsed_error_data[:errors][0][:status]).to eq("404")
-        expect(parsed_error_data[:errors][0][:title]).to eq("NoPuzzlesException")
+        expect(parsed_error_data[:errors][0][:title]).to eq("PuzzleNotAvailableException")
         expect(parsed_error_data[:errors][0][:detail]).to eq("Puzzle is not available for loan.")
       end
 
@@ -198,7 +198,7 @@ RSpec.describe 'Users/LoansController' do
         expect(parsed_error_data[:errors][0]).to be_a(Hash)
         expect(parsed_error_data[:errors][0].keys).to eq([:status, :title, :detail])
         expect(parsed_error_data[:errors][0][:status]).to eq("404")
-        expect(parsed_error_data[:errors][0][:title]).to eq("NoPuzzlesException")
+        expect(parsed_error_data[:errors][0][:title]).to eq("PuzzleNotAvailableException")
         expect(parsed_error_data[:errors][0][:detail]).to eq("Puzzle is not available for loan.")
       end
 
@@ -221,7 +221,7 @@ RSpec.describe 'Users/LoansController' do
         expect(parsed_error_data[:errors][0]).to be_a(Hash)
         expect(parsed_error_data[:errors][0].keys).to eq([:status, :title, :detail])
         expect(parsed_error_data[:errors][0][:status]).to eq("404")
-        expect(parsed_error_data[:errors][0][:title]).to eq("NoPuzzlesException")
+        expect(parsed_error_data[:errors][0][:title]).to eq("PuzzleNotAvailableException")
         expect(parsed_error_data[:errors][0][:detail]).to eq("Puzzle is not available for loan.")
       end
     end
@@ -319,10 +319,10 @@ RSpec.describe 'Users/LoansController' do
     end
 
     context "when NOT successful" do
-      it 'returns an error message when an action type is invalid' do
+      it 'returns an error message when a loan action_type is invalid' do
         expect(@current_loan.puzzle.status).to eq("Pending")
 
-        loan_update = { action_type: "puzzled" }
+        loan_update = { action_type: "invalid_action" }
 
         headers = { 'CONTENT_TYPE' => 'application/json' }
         patch "/api/v1/users/#{@user_1.id}/loans/#{@current_loan.id}", headers:, params: JSON.generate(loan_update)
@@ -330,11 +330,39 @@ RSpec.describe 'Users/LoansController' do
         @current_loan.reload
         expect(@current_loan.puzzle.status).to eq("Pending")
 
-        expect(response).to have_http_status(422)
+        expect(response).to have_http_status(404)
         parsed_error_data = JSON.parse(response.body, symbolize_names: true)
+
         expect(parsed_error_data).to be_a(Hash)
-        expect(parsed_error_data.keys).to eq([:error])
-        expect(parsed_error_data[:error]).to eq("Unable to update loan status")
+        expect(parsed_error_data.keys).to eq([:errors])
+        expect(parsed_error_data[:errors]).to be_an(Array)
+        expect(parsed_error_data[:errors][0].keys).to eq([:status, :title, :detail])
+        expect(parsed_error_data[:errors][0][:status]).to eq("404")
+        expect(parsed_error_data[:errors][0][:title]).to eq("NoLoanUpdateException")
+        expect(parsed_error_data[:errors][0][:detail]).to eq("Unable to update loan.")
+      end
+
+      it 'returns an error message when a loan action_type is nil' do
+        expect(@current_loan.puzzle.status).to eq("Pending")
+
+        loan_update = { action_type: nil }
+
+        headers = { 'CONTENT_TYPE' => 'application/json' }
+        patch "/api/v1/users/#{@user_1.id}/loans/#{@current_loan.id}", headers:, params: JSON.generate(loan_update)
+
+        @current_loan.reload
+        expect(@current_loan.puzzle.status).to eq("Pending")
+
+        expect(response).to have_http_status(404)
+        parsed_error_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(parsed_error_data).to be_a(Hash)
+        expect(parsed_error_data.keys).to eq([:errors])
+        expect(parsed_error_data[:errors]).to be_an(Array)
+        expect(parsed_error_data[:errors][0].keys).to eq([:status, :title, :detail])
+        expect(parsed_error_data[:errors][0][:status]).to eq("404")
+        expect(parsed_error_data[:errors][0][:title]).to eq("NoLoanUpdateException")
+        expect(parsed_error_data[:errors][0][:detail]).to eq("Unable to update loan.")
       end
 
       it 'returns an error message when loan update fails' do
@@ -349,11 +377,16 @@ RSpec.describe 'Users/LoansController' do
         @current_loan.reload
         expect(@current_loan.puzzle.status).to eq("Pending")
 
-        expect(response).to have_http_status(422)
+        expect(response).to have_http_status(404)
         parsed_error_data = JSON.parse(response.body, symbolize_names: true)
+
         expect(parsed_error_data).to be_a(Hash)
-        expect(parsed_error_data.keys).to eq([:error])
-        expect(parsed_error_data[:error]).to eq("Unable to update loan status")
+        expect(parsed_error_data.keys).to eq([:errors])
+        expect(parsed_error_data[:errors]).to be_an(Array)
+        expect(parsed_error_data[:errors][0].keys).to eq([:status, :title, :detail])
+        expect(parsed_error_data[:errors][0][:status]).to eq("404")
+        expect(parsed_error_data[:errors][0][:title]).to eq("NoLoanUpdateException")
+        expect(parsed_error_data[:errors][0][:detail]).to eq("Unable to update loan.")
       end
     end
   end

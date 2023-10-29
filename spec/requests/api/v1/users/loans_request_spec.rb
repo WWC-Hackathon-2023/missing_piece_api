@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Users/LoansController' do
   describe '#create' do
     context "when successful" do
-      it 'creates a new loan' do
+      it 'creates a new loan (puzzles status is Available)' do
         user_1 = create(:user, id: 1)
         user_2 = create(:user, id: 2)
         puzzle_1 = create(:puzzle, user: user_1)
@@ -38,28 +38,123 @@ RSpec.describe 'Users/LoansController' do
     end
 
     context "when NOT successful" do
-      # Extreme Edge Case that's unlikely since we check puzzle status before each loan.
-      # it 'returns an error message if trying to make the same loan twice' do
-      #   user_1 = create(:user, id: 1)
-      #   user_2 = create(:user, id: 2)
-      #   puzzle_1 = create(:puzzle, user: user_1)
+      it 'returns a 404 error message if borrower_id is invalid' do
+        user_1 = create(:user, id: 1)
+        user_2 = create(:user, id: 2)
+        puzzle_1 = create(:puzzle, user: user_1)
 
-      #   create(:loan, owner: user_1, borrower: user_2, puzzle: puzzle_1)
-      #   allow(Loan).to receive(:new).and_return(double(save: false))
+        post "/api/v1/users/#{user_1.id}/loans", params: {
+          puzzle_id: puzzle_1.id,
+          borrower_id: 5
+        }
 
-      #   post "/api/v1/users/#{user_1.id}/loans", params: {
-      #     puzzle_id: puzzle_1.id,
-      #     borrower_id: user_2.id
-      #   }
+        expect(response).to have_http_status(404)
+        parsed_error_data = JSON.parse(response.body, symbolize_names: true)
 
-      #   expect(response).to have_http_status(422)
+        expect(parsed_error_data).to be_a(Hash)
+        expect(parsed_error_data.keys).to eq([:errors])
+        expect(parsed_error_data[:errors]).to be_an(Array)
+        expect(parsed_error_data[:errors][0]).to be_a(Hash)
+        expect(parsed_error_data[:errors][0].keys).to eq([:status, :title, :detail])
+        expect(parsed_error_data[:errors][0][:status]).to eq("404")
+        expect(parsed_error_data[:errors][0][:title]).to eq("ActiveRecord::RecordNotFound")
+        expect(parsed_error_data[:errors][0][:detail]).to eq("Couldn't find User with 'id'=5")
+      end
 
-      #   parsed_error_data = JSON.parse(response.body, symbolize_names: true)
+      it 'returns a 404 error message if borrower_id is nil' do
+        user_1 = create(:user, id: 1)
+        user_2 = create(:user, id: 2)
+        puzzle_1 = create(:puzzle, user: user_1)
 
-      #   expect(parsed_error_data).to be_a(Hash)
-      #   expect(parsed_error_data.keys).to eq([:error])
-      #   expect(parsed_error_data[:error]).to eq("Unable to create loan.")
-      # end
+        post "/api/v1/users/#{user_1.id}/loans", params: {
+          puzzle_id: puzzle_1.id,
+          borrower_id: nil
+        }
+
+        expect(response).to have_http_status(404)
+        parsed_error_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(parsed_error_data).to be_a(Hash)
+        expect(parsed_error_data.keys).to eq([:errors])
+        expect(parsed_error_data[:errors]).to be_an(Array)
+        expect(parsed_error_data[:errors][0]).to be_a(Hash)
+        expect(parsed_error_data[:errors][0].keys).to eq([:status, :title, :detail])
+        expect(parsed_error_data[:errors][0][:status]).to eq("404")
+        expect(parsed_error_data[:errors][0][:title]).to eq("ActiveRecord::RecordNotFound")
+        expect(parsed_error_data[:errors][0][:detail]).to eq("Couldn't find User without an ID")
+      end
+
+      it 'returns a 404 error message if puzzle_id is invalid' do
+        user_1 = create(:user, id: 1)
+        user_2 = create(:user, id: 2)
+        puzzle_1 = create(:puzzle, user: user_1)
+
+        post "/api/v1/users/#{user_1.id}/loans", params: {
+          puzzle_id: 5,
+          borrower_id: user_2.id
+        }
+
+        expect(response).to have_http_status(404)
+        parsed_error_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(parsed_error_data).to be_a(Hash)
+        expect(parsed_error_data.keys).to eq([:errors])
+        expect(parsed_error_data[:errors]).to be_an(Array)
+        expect(parsed_error_data[:errors][0]).to be_a(Hash)
+        expect(parsed_error_data[:errors][0].keys).to eq([:status, :title, :detail])
+        expect(parsed_error_data[:errors][0][:status]).to eq("404")
+        expect(parsed_error_data[:errors][0][:title]).to eq("ActiveRecord::RecordNotFound")
+        expect(parsed_error_data[:errors][0][:detail]).to eq("Couldn't find Puzzle with 'id'=5")
+      end
+
+      it 'returns a 404 error message if puzzle_id is nil' do
+        user_1 = create(:user, id: 1)
+        user_2 = create(:user, id: 2)
+        puzzle_1 = create(:puzzle, user: user_1)
+
+        post "/api/v1/users/#{user_1.id}/loans", params: {
+          puzzle_id: nil,
+          borrower_id: user_2.id
+        }
+
+        expect(response).to have_http_status(404)
+        parsed_error_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(parsed_error_data).to be_a(Hash)
+        expect(parsed_error_data.keys).to eq([:errors])
+        expect(parsed_error_data[:errors]).to be_an(Array)
+        expect(parsed_error_data[:errors][0]).to be_a(Hash)
+        expect(parsed_error_data[:errors][0].keys).to eq([:status, :title, :detail])
+        expect(parsed_error_data[:errors][0][:status]).to eq("404")
+        expect(parsed_error_data[:errors][0][:title]).to eq("ActiveRecord::RecordNotFound")
+        expect(parsed_error_data[:errors][0][:detail]).to eq("Couldn't find Puzzle without an ID")
+      end
+
+      it 'returns a 404 error message if user_id is invalid' do
+        user_1 = create(:user, id: 1)
+        user_2 = create(:user, id: 2)
+        puzzle_1 = create(:puzzle, user: user_1)
+
+        post "/api/v1/users/5/loans", params: {
+          puzzle_id: puzzle_1.id,
+          borrower_id: user_2.id
+        }
+
+        expect(response).to have_http_status(404)
+        parsed_error_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(parsed_error_data).to be_a(Hash)
+        expect(parsed_error_data.keys).to eq([:errors])
+        expect(parsed_error_data[:errors]).to be_an(Array)
+        expect(parsed_error_data[:errors][0]).to be_a(Hash)
+        expect(parsed_error_data[:errors][0].keys).to eq([:status, :title, :detail])
+        expect(parsed_error_data[:errors][0][:status]).to eq("404")
+        expect(parsed_error_data[:errors][0][:title]).to eq("ActiveRecord::RecordNotFound")
+        expect(parsed_error_data[:errors][0][:detail]).to eq("Couldn't find User with 'id'=5")
+      end
+
+      # Note: How to test if user_id is nil: post "/api/v1/users/#{nil}/loans" ?
+      # Since this raises an ActionController::RoutingError and cannot be handled in the ApplicationController
 
       it 'returns an error message if trying to make a loan when a Puzzle status is Pending' do
         user_1 = create(:user, id: 1)

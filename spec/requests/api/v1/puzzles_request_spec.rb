@@ -118,7 +118,7 @@ RSpec.describe "PuzzlesController", type: :request do
         expect(parsed_error_data[:errors]).to be_an(Array)
         expect(parsed_error_data[:errors][0]).to be_a(Hash)
         expect(parsed_error_data[:errors][0].keys).to eq([:status, :title, :detail])
-        expect(parsed_error_data[:errors][0][:status]).to eq("not_found")
+        expect(parsed_error_data[:errors][0][:status]).to eq("404")
         expect(parsed_error_data[:errors][0][:title]).to eq("NoPuzzlesException")
         expect(parsed_error_data[:errors][0][:detail]).to eq("No puzzles found in this area.")
       end
@@ -138,7 +138,7 @@ RSpec.describe "PuzzlesController", type: :request do
         expect(parsed_error_data[:errors]).to be_an(Array)
         expect(parsed_error_data[:errors][0]).to be_a(Hash)
         expect(parsed_error_data[:errors][0].keys).to eq([:status, :title, :detail])
-        expect(parsed_error_data[:errors][0][:status]).to eq("not_found")
+        expect(parsed_error_data[:errors][0][:status]).to eq("404")
         expect(parsed_error_data[:errors][0][:title]).to eq("NoPuzzlesException")
         expect(parsed_error_data[:errors][0][:detail]).to eq("No puzzles found in this area.")
       end
@@ -158,7 +158,7 @@ RSpec.describe "PuzzlesController", type: :request do
         expect(parsed_error_data[:errors]).to be_an(Array)
         expect(parsed_error_data[:errors][0]).to be_a(Hash)
         expect(parsed_error_data[:errors][0].keys).to eq([:status, :title, :detail])
-        expect(parsed_error_data[:errors][0][:status]).to eq("not_found")
+        expect(parsed_error_data[:errors][0][:status]).to eq("404")
         expect(parsed_error_data[:errors][0][:title]).to eq("NoPuzzlesException")
         expect(parsed_error_data[:errors][0][:detail]).to eq("No puzzles found in this area.")
       end

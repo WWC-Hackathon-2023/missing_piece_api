@@ -1,0 +1,2 @@
+class MissingAuthenticationException < StandardError
+end

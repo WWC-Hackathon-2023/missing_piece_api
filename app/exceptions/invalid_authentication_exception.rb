@@ -1,0 +1,2 @@
+class InvalidAuthenticationException < StandardError
+end

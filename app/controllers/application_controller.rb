@@ -8,6 +8,7 @@ class ApplicationController < ActionController::API
   rescue_from NoLoanUpdateException, with: :no_loan_update
   rescue_from InvalidAuthenticationException, with: :invalid_authentication
   rescue_from MissingAuthenticationException, with: :missing_authentication
+  rescue_from UnauthorizedException, with: :unauthorized
 
 
   def set_current_user
@@ -40,6 +41,11 @@ class ApplicationController < ActionController::API
 
   def missing_authentication
     error = MissingAuthenticationException.new("Email and password are required.")
+    render json: ErrorSerializer.new(error, 401).serializable_hash, status: :unauthorized # 401
+  end
+
+  def unauthorized
+    error = UnauthorizedException.new("Not Authorized.")
     render json: ErrorSerializer.new(error, 401).serializable_hash, status: :unauthorized # 401
   end
 

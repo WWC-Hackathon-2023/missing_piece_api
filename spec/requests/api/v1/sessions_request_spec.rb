@@ -97,23 +97,23 @@ RSpec.describe 'SessionsController' do
     end
 
     context 'when NOT successful' do
-      # Unsure how to test this:
+      it 'cannot delete a user session of another user' do
+        user_1 = create(:user)
+        user_2 = create(:user)
+        login_data = { email: user_1.email, password: user_1.password }
 
-      # it 'cannot delete a user session of another user' do
-      #   user = create(:user)
-      #   login_data = { email: user.email, password: user.password }
+        headers = { 'CONTENT_TYPE' => 'application/json' }
+        post "/api/v1/login", headers:, params: JSON.generate(login_data)
 
-      #   headers = { 'CONTENT_TYPE' => 'application/json' }
-      #   post "/api/v1/users/#{user.id}/login", headers:, params: JSON.generate(login_data)
+        expect(response).to have_http_status(201)
+        expect(session[:user_id]).to eq(user_1.id)
+        session_token_user1 = JSON.parse(response.body)['session_token']
 
-      #   expect(response).to have_http_status(201)
-      #   expect(session[:user_id]).to eq(user.id)
+        delete "/api/v1/users/#{user_2.id}/logout", headers: { 'Authorization' => "Bearer #{session_token_user1}" }
 
-      #   delete "/api/v1/users/007/logout"
-
-      #   expect(response).to have_http_status(401)
-      #   expect(session[:user_id]).to eq(user.id)
-      # end
+        expect(response).to have_http_status(401)
+        expect(session[:user_id]).to eq(user_1.id)
+      end
     end
   end
 end

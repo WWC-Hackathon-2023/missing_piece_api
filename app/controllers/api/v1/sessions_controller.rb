@@ -10,7 +10,7 @@ class Api::V1::SessionsController < ApplicationController
 
   def destroy
     session.delete(:user_id)
-    head :no_content
+    head :no_content # Ensures that the client receives an HTTP status code of 204 No Content along with an empty response body
   end
 
   private
@@ -22,7 +22,7 @@ class Api::V1::SessionsController < ApplicationController
   def authenticate_user
     if params[:email].present? && params[:password].present?
       @returning_user = User.find_by(email: params[:email])
-      raise InvalidAuthenticationException unless @returning_user&.authenticate(params[:password])
+      raise InvalidAuthenticationException unless @returning_user&.authenticate(params[:password]) # The & is a 'safe navigation operator' which allows you to call a method on an object only if that object is not nil 
     else 
       raise MissingAuthenticationException
     end

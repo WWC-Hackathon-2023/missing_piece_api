@@ -87,8 +87,7 @@ RSpec.describe Loan, type: :model do
         before(:each) do
           @user_1 = create(:user, id: 1)
           @user_2 = create(:user, id: 2)
-          # Unsure if forcing this status is best practice:
-          # However, when a loan is created through the controller the puzzle status will change to Pending
+          # When a loan is created through the controller the puzzle status will change to Pending
           @puzzle_1 = create(:puzzle, user: @user_1, status: "Pending")
 
           @loan_1 = Loan.create(

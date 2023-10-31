@@ -24,8 +24,6 @@ RSpec.describe 'SessionsController' do
         post "/api/v1/login", headers:, params: JSON.generate(login_data)
 
         expect(response).to have_http_status(201)
-        parsed_data = JSON.parse(response.body, symbolize_names: true)
-
         expect(session[:user_id]).to eq(@user.id)
       end
     end

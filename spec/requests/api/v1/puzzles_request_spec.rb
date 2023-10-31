@@ -10,16 +10,16 @@ RSpec.describe "PuzzlesController", type: :request do
         @user_2 = create(:user, id: 2, zip_code: 12345)
         @user_3 = create(:user, id: 3, zip_code: 54321)
         @user_4 = create(:user, id: 4, zip_code: 54321)
-  
+
         @puzzle_1 = create(:puzzle, id: 1, user: @user_1)
         @puzzle_2 = create(:puzzle, id: 2, user: @user_1)
-  
+
         @puzzle_3 = create(:puzzle, id: 3, user: @user_2)
         @puzzle_4 = create(:puzzle, id: 4, user: @user_2)
-  
+
         @puzzle_5 = create(:puzzle, id: 5, user: @user_3)
         @puzzle_6 = create(:puzzle, id: 6, user: @user_3, status: 1)
-  
+
         @puzzle_7 = create(:puzzle, id: 7, user: @user_4, status: 2)
         @puzzle_8 = create(:puzzle, id: 8, user: @user_4, status: 3)
       end
@@ -41,10 +41,10 @@ RSpec.describe "PuzzlesController", type: :request do
         expect(parsed_data[:data][0]).to be_a(Hash)
         expect(parsed_data[:data][0].keys).to eq([:id, :type, :attributes])
 
-        expect(parsed_data[:data][0][:id]).to eq(@puzzle_1.id.to_s) 
-        expect(parsed_data[:data][1][:id]).to eq(@puzzle_2.id.to_s) 
-        expect(parsed_data[:data][2][:id]).to eq(@puzzle_3.id.to_s) 
-        expect(parsed_data[:data][3][:id]).to eq(@puzzle_4.id.to_s) 
+        expect(parsed_data[:data][0][:id]).to eq(@puzzle_1.id.to_s)
+        expect(parsed_data[:data][1][:id]).to eq(@puzzle_2.id.to_s)
+        expect(parsed_data[:data][2][:id]).to eq(@puzzle_3.id.to_s)
+        expect(parsed_data[:data][3][:id]).to eq(@puzzle_4.id.to_s)
 
         expect(parsed_data[:data][0][:attributes]).to be_a(Hash)
         expect(parsed_data[:data][0][:attributes].keys).to eq([:user_id, :status, :title, :description, :total_pieces, :notes, :puzzle_image_url])
@@ -95,10 +95,10 @@ RSpec.describe "PuzzlesController", type: :request do
         @user_1 = create(:user, id: 1, zip_code: 12345)
         @user_2 = create(:user, id: 2, zip_code: 12345)
         @user_3 = create(:user, id: 3, zip_code: 54321)
-  
+
         @puzzle_1 = create(:puzzle, id: 1, user: @user_1)
         @puzzle_2 = create(:puzzle, id: 2, user: @user_1)
-  
+
         @puzzle_3 = create(:puzzle, id: 3, user: @user_2)
         @puzzle_4 = create(:puzzle, id: 4, user: @user_2)
       end
@@ -144,7 +144,7 @@ RSpec.describe "PuzzlesController", type: :request do
       end
 
       it 'returns a NoPuzzlesException error when nil is sent as zip code' do
-        zip_code = nil 
+        zip_code = nil
         zipcode_params = { zip_code: zip_code }
 
         headers = { 'CONTENT_TYPE' => 'application/json' }

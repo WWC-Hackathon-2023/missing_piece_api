@@ -14,7 +14,7 @@ class Api::V1::SessionsController < ApplicationController
   end
 
   private
-  
+
   def authorize
     raise UnauthorizedException if params[:user_id].to_i != session[:user_id]
   end
@@ -22,7 +22,8 @@ class Api::V1::SessionsController < ApplicationController
   def authenticate_user
     check_email_password_presence
     @returning_user = User.find_by(email: params[:email])
-    raise InvalidAuthenticationException unless @returning_user&.authenticate(params[:password]) # The & is a 'safe navigation operator' which allows you to call a method on an object only if that object is not nil 
+    raise InvalidAuthenticationException unless @returning_user&.authenticate(params[:password])
+    # The & is a 'safe navigation operator' which allows you to call a method on an object only if that object is not nil
   end
 
   def check_email_password_presence

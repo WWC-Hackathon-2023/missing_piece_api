@@ -60,7 +60,7 @@ RSpec.describe User, type: :model do
         end
 
         # user_1 Owner Loans
-        @loan_1 = create(:loan, owner: @user_1, borrower: @user_3) 
+        @loan_1 = create(:loan, owner: @user_1, borrower: @user_3)
         @loan_2 = create(:loan, owner: @user_1, borrower: @user_3)
         @loan_3 = create(:loan, owner: @user_1, borrower: @user_4)
 

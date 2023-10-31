@@ -24,7 +24,7 @@ RSpec.describe Puzzle, type: :model do
         @user_1 = create(:user, id: 1, zip_code: 12345)
         @user_2 = create(:user, id: 2, zip_code: 12345)
         @user_3 = create(:user, id: 3, zip_code: 54321)
-  
+
         @puzzle_1 = create(:puzzle, user: @user_1)
         @puzzle_2 = create(:puzzle, user: @user_1)
 

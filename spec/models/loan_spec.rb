@@ -24,8 +24,8 @@ RSpec.describe Loan, type: :model do
           @user_2 = create(:user, id: 2)
           # Unsure if forcing this status is best practice:
           # However, when a loan is created through the controller the puzzle status will change to Pending
-          @puzzle_1 = create(:puzzle, user: @user_1, status: "Pending") 
-          
+          @puzzle_1 = create(:puzzle, user: @user_1, status: "Pending")
+
           @loan_1 = Loan.create(
             owner: @user_1,
             borrower: @user_2,
@@ -89,8 +89,8 @@ RSpec.describe Loan, type: :model do
           @user_2 = create(:user, id: 2)
           # Unsure if forcing this status is best practice:
           # However, when a loan is created through the controller the puzzle status will change to Pending
-          @puzzle_1 = create(:puzzle, user: @user_1, status: "Pending")  
-          
+          @puzzle_1 = create(:puzzle, user: @user_1, status: "Pending")
+
           @loan_1 = Loan.create(
             owner: @user_1,
             borrower: @user_2,
@@ -106,7 +106,7 @@ RSpec.describe Loan, type: :model do
 
             # Squiggly brackets are necessary when expecting an exception when using RSpec's raise_error matcher
             expect { @loan_1.update_status_and_puzzle_status("invalid_action") }.to raise_error(NoLoanUpdateException)
-            
+
             expect(@loan_1.status).to eq("Pending") # loan_status = 0
             expect(@loan_1.puzzle.status).to eq("Pending") # puzzle_status = 1
           end
@@ -115,13 +115,13 @@ RSpec.describe Loan, type: :model do
         context "when a loan action_type is nil" do
           it 'raises a NoLoanUpdateException & loan/puzzle status is unchanged' do
             expect(@loan_1.status).to eq("Pending") # loan_status = 0
-              expect(@loan_1.puzzle.status).to eq("Pending") # puzzle_status = 1
+            expect(@loan_1.puzzle.status).to eq("Pending") # puzzle_status = 1
 
-              # Squiggly brackets are necessary when expecting an exception when using RSpec's raise_error matcher
-              expect { @loan_1.update_status_and_puzzle_status(nil) }.to raise_error(NoLoanUpdateException)
-              
-              expect(@loan_1.status).to eq("Pending") # loan_status = 0
-              expect(@loan_1.puzzle.status).to eq("Pending") # puzzle_status = 1
+            # Squiggly brackets are necessary when expecting an exception when using RSpec's raise_error matcher
+            expect { @loan_1.update_status_and_puzzle_status(nil) }.to raise_error(NoLoanUpdateException)
+
+            expect(@loan_1.status).to eq("Pending") # loan_status = 0
+            expect(@loan_1.puzzle.status).to eq("Pending") # puzzle_status = 1
           end
         end
       end

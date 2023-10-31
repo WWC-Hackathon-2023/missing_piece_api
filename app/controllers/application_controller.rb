@@ -10,7 +10,6 @@ class ApplicationController < ActionController::API
   rescue_from MissingAuthenticationException, with: :missing_authentication
   rescue_from UnauthorizedException, with: :unauthorized
 
-
   def set_current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end

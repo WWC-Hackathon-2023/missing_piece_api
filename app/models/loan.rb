@@ -9,21 +9,21 @@ class Loan < ApplicationRecord
 
   def update_status_and_puzzle_status(action_type)
     loan_status, puzzle_status = case action_type
-      when 'accept' then [1, 2]
-      when 'withdraw' then [2, 0]
-      when 'deny' then [2, 2]
-      when 'close' then [3, 0]
-      else raise NoLoanUpdateException
-    end
+                                 when 'accept' then [1, 2]
+                                 when 'withdraw' then [2, 0]
+                                 when 'deny' then [2, 2]
+                                 when 'close' then [3, 0]
+                                 else raise NoLoanUpdateException
+                                 end
     change_loan_and_puzzle_status(loan_status, puzzle_status)
     self
   end
-  
-  private 
+
+  private
 
   def change_loan_and_puzzle_status(loan_status, puzzle_status)
-    self.update!(status: loan_status)
-    self.puzzle.update!(status: puzzle_status)
+    update!(status: loan_status)
+    puzzle.update!(status: puzzle_status)
   end
 end
 

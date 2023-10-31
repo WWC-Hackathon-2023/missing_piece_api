@@ -2,21 +2,23 @@ require 'rails_helper'
 
 RSpec.describe 'Users/LoansController' do
   describe '#create' do
+    before(:each) do
+      @user_1 = create(:user, id: 1)
+      @user_2 = create(:user, id: 2)
+      @puzzle_1 = create(:puzzle, user: @user_1)
+    end
+
     context "when successful" do
       it 'creates a new loan (puzzles status is Available)' do
-        user_1 = create(:user, id: 1)
-        user_2 = create(:user, id: 2)
-        puzzle_1 = create(:puzzle, user: user_1)
-
-        expect(puzzle_1.status).to eq("Available")
+        expect(@puzzle_1.status).to eq("Available")
 
         loan_request = {
-          puzzle_id: puzzle_1.id,
-          borrower_id: user_2.id
+          puzzle_id: @puzzle_1.id,
+          borrower_id: @user_2.id
         }
 
         headers = { 'CONTENT_TYPE' => 'application/json' }
-        post "/api/v1/users/#{user_1.id}/loans", headers:, params: JSON.generate(loan_request)
+        post "/api/v1/users/#{@user_1.id}/loans", headers:, params: JSON.generate(loan_request)
 
         expect(Loan.last.puzzle.status).to eq("Pending")
         expect(response).to have_http_status(201)
@@ -30,21 +32,17 @@ RSpec.describe 'Users/LoansController' do
 
         expect(parsed_data[:data][:attributes]).to be_a(Hash)
         expect(parsed_data[:data][:attributes].keys).to eq([:owner_id, :borrower_id, :puzzle_id, :status])
-        expect(parsed_data[:data][:attributes][:owner_id]).to eq(user_1.id)
-        expect(parsed_data[:data][:attributes][:borrower_id]).to eq(user_2.id)
-        expect(parsed_data[:data][:attributes][:puzzle_id]).to eq(puzzle_1.id)
+        expect(parsed_data[:data][:attributes][:owner_id]).to eq(@user_1.id)
+        expect(parsed_data[:data][:attributes][:borrower_id]).to eq(@user_2.id)
+        expect(parsed_data[:data][:attributes][:puzzle_id]).to eq(@puzzle_1.id)
         expect(parsed_data[:data][:attributes][:status]).to eq("Pending")
       end
     end
 
     context "when NOT successful" do
       it 'returns a 404 error message if borrower_id is invalid' do
-        user_1 = create(:user, id: 1)
-        user_2 = create(:user, id: 2)
-        puzzle_1 = create(:puzzle, user: user_1)
-
-        post "/api/v1/users/#{user_1.id}/loans", params: {
-          puzzle_id: puzzle_1.id,
+        post "/api/v1/users/#{@user_1.id}/loans", params: {
+          puzzle_id: @puzzle_1.id,
           borrower_id: 5
         }
 
@@ -62,12 +60,8 @@ RSpec.describe 'Users/LoansController' do
       end
 
       it 'returns a 404 error message if borrower_id is nil' do
-        user_1 = create(:user, id: 1)
-        user_2 = create(:user, id: 2)
-        puzzle_1 = create(:puzzle, user: user_1)
-
-        post "/api/v1/users/#{user_1.id}/loans", params: {
-          puzzle_id: puzzle_1.id,
+        post "/api/v1/users/#{@user_1.id}/loans", params: {
+          puzzle_id: @puzzle_1.id,
           borrower_id: nil
         }
 
@@ -85,13 +79,9 @@ RSpec.describe 'Users/LoansController' do
       end
 
       it 'returns a 404 error message if puzzle_id is invalid' do
-        user_1 = create(:user, id: 1)
-        user_2 = create(:user, id: 2)
-        puzzle_1 = create(:puzzle, user: user_1)
-
-        post "/api/v1/users/#{user_1.id}/loans", params: {
+        post "/api/v1/users/#{@user_1.id}/loans", params: {
           puzzle_id: 5,
-          borrower_id: user_2.id
+          borrower_id: @user_2.id
         }
 
         expect(response).to have_http_status(404)
@@ -108,13 +98,9 @@ RSpec.describe 'Users/LoansController' do
       end
 
       it 'returns a 404 error message if puzzle_id is nil' do
-        user_1 = create(:user, id: 1)
-        user_2 = create(:user, id: 2)
-        puzzle_1 = create(:puzzle, user: user_1)
-
-        post "/api/v1/users/#{user_1.id}/loans", params: {
+        post "/api/v1/users/#{@user_1.id}/loans", params: {
           puzzle_id: nil,
-          borrower_id: user_2.id
+          borrower_id: @user_2.id
         }
 
         expect(response).to have_http_status(404)
@@ -131,13 +117,9 @@ RSpec.describe 'Users/LoansController' do
       end
 
       it 'returns a 404 error message if user_id is invalid' do
-        user_1 = create(:user, id: 1)
-        user_2 = create(:user, id: 2)
-        puzzle_1 = create(:puzzle, user: user_1)
-
         post "/api/v1/users/5/loans", params: {
-          puzzle_id: puzzle_1.id,
-          borrower_id: user_2.id
+          puzzle_id: @puzzle_1.id,
+          borrower_id: @user_2.id
         }
 
         expect(response).to have_http_status(404)
@@ -153,17 +135,15 @@ RSpec.describe 'Users/LoansController' do
         expect(parsed_error_data[:errors][0][:detail]).to eq("Couldn't find User with 'id'=5")
       end
 
-      # Note: How to test if user_id is nil: post "/api/v1/users/#{nil}/loans" ?
+      # NOTE: How to test if user_id is nil: post "/api/v1/users/#{nil}/loans" ?
       # Since this raises an ActionController::RoutingError and cannot be handled in the ApplicationController
 
       it 'returns an error message if trying to make a loan when a Puzzle status is Pending' do
-        user_1 = create(:user, id: 1)
-        user_2 = create(:user, id: 2)
-        puzzle_1 = create(:puzzle, user: user_1, status: 1) # Puzzle status 1 = "Pending"
+        puzzle_2 = create(:puzzle, user: @user_1, status: 1) # Puzzle status 1 = "Pending"
 
-        post "/api/v1/users/#{user_1.id}/loans", params: {
-          puzzle_id: puzzle_1.id,
-          borrower_id: user_2.id
+        post "/api/v1/users/#{@user_1.id}/loans", params: {
+          puzzle_id: puzzle_2.id,
+          borrower_id: @user_2.id
         }
 
         expect(response).to have_http_status(404)
@@ -180,13 +160,11 @@ RSpec.describe 'Users/LoansController' do
       end
 
       it 'returns an error message if trying to make a loan when a Puzzle status is Not Available' do
-        user_1 = create(:user, id: 1)
-        user_2 = create(:user, id: 2)
-        puzzle_1 = create(:puzzle, user: user_1, status: 2) # Puzzle status 2 = "Not Available"
+        puzzle_3 = create(:puzzle, user: @user_1, status: 2) # Puzzle status 2 = "Not Available"
 
-        post "/api/v1/users/#{user_1.id}/loans", params: {
-          puzzle_id: puzzle_1.id,
-          borrower_id: user_2.id
+        post "/api/v1/users/#{@user_1.id}/loans", params: {
+          puzzle_id: puzzle_3.id,
+          borrower_id: @user_2.id
         }
 
         expect(response).to have_http_status(404)
@@ -203,13 +181,11 @@ RSpec.describe 'Users/LoansController' do
       end
 
       it 'returns an error message if trying to make a loan when a Puzzle status is Permanently Removed' do
-        user_1 = create(:user, id: 1)
-        user_2 = create(:user, id: 2)
-        puzzle_1 = create(:puzzle, user: user_1, status: 3) # Puzzle status 3 = "Permanently Removed"
+        puzzle_4 = create(:puzzle, user: @user_1, status: 3) # Puzzle status 3 = "Permanently Removed"
 
-        post "/api/v1/users/#{user_1.id}/loans", params: {
-          puzzle_id: puzzle_1.id,
-          borrower_id: user_2.id
+        post "/api/v1/users/#{@user_1.id}/loans", params: {
+          puzzle_id: puzzle_4.id,
+          borrower_id: @user_2.id
         }
 
         expect(response).to have_http_status(404)
@@ -240,7 +216,7 @@ RSpec.describe 'Users/LoansController' do
 
       headers = { 'CONTENT_TYPE' => 'application/json' }
       post "/api/v1/users/#{@user_1.id}/loans", headers:, params: JSON.generate(loan_request)
-      
+
       @current_loan = Loan.last
     end
 

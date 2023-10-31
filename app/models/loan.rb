@@ -27,12 +27,6 @@ class Loan < ApplicationRecord
   end
 end
 
-
-
-
-
-
-
 # Note to self: Saving this to remember process that lead me to final version:
 # def update_status_and_puzzle_status(action_type)
 #   case action_type

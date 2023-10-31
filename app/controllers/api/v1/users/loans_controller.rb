@@ -5,9 +5,8 @@ class Api::V1::Users::LoansController < ApplicationController
 
   def create
     loan = Loan.new(owner_id: @owner.id, puzzle_id: @puzzle.id, borrower_id: @borrower.id)
-    if loan.save && loan.puzzle.update(status: 1)
-      render json: LoanSerializer.new(loan), status: :created #201
-    end
+    return unless loan.save && loan.puzzle.update(status: 1)
+    render json: LoanSerializer.new(loan), status: :created # 201
   end
 
   def update
@@ -16,7 +15,7 @@ class Api::V1::Users::LoansController < ApplicationController
   end
 
   private
-  
+
   def find_users_and_puzzle
     @owner = User.find(params[:user_id])
     @borrower = User.find(params[:borrower_id])

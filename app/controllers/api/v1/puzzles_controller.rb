@@ -7,7 +7,7 @@ class Api::V1::PuzzlesController < ApplicationController
     render json: PuzzleSerializer.new(@puzzles_in_zip_code)
   end
 
-  private 
+  private
 
   def find_puzzles(zip_code)
     @puzzles_in_zip_code = Puzzle.find_by_zip_code(zip_code)
@@ -15,11 +15,11 @@ class Api::V1::PuzzlesController < ApplicationController
 end
 
 # Note to self: Saving this to remember process that lead me to final version:
-#def index
-  # puzzles_in_zip_code = Puzzle.find_by_zip_code(params[:zip_code])
-  # if @puzzles_in_zip_code.any?
-  #   render json: PuzzleSerializer.new(@puzzles_in_zip_code)
-  # else
-  #   raise NoPuzzlesException
-  # end
+# def index
+# puzzles_in_zip_code = Puzzle.find_by_zip_code(params[:zip_code])
+# if @puzzles_in_zip_code.any?
+#   render json: PuzzleSerializer.new(@puzzles_in_zip_code)
+# else
+#   raise NoPuzzlesException
+# end
 # end

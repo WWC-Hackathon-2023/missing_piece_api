@@ -10,7 +10,6 @@ class ApplicationController < ActionController::API
   rescue_from MissingAuthenticationException, with: :missing_authentication
   rescue_from UnauthorizedException, with: :unauthorized
 
-
   def set_current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
@@ -19,36 +18,31 @@ class ApplicationController < ActionController::API
     render json: ErrorSerializer.new(exception, 404).serializable_hash, status: :not_found # 404
   end
 
+  def unauthorized(exception = "Not Authorized.")
+    render json: ErrorSerializer.new(exception, 401).serializable_hash, status: :unauthorized # 401
+  end
+
+  private
+
   def no_puzzles_found
-    error = NoPuzzlesFoundException.new("No puzzles found in this area.")
-    render json: ErrorSerializer.new(error, 404).serializable_hash, status: :not_found # 404
+    record_not_found(NoPuzzlesFoundException.new("No puzzles found in this area."))
   end
 
   def puzzle_not_available
-    error = PuzzleNotAvailableException.new("Puzzle is not available for loan.")
-    render json: ErrorSerializer.new(error, 404).serializable_hash, status: :not_found # 404
+    record_not_found(PuzzleNotAvailableException.new("Puzzle is not available for loan."))
   end
 
   def no_loan_update
-    error = NoLoanUpdateException.new("Unable to update loan.")
-    render json: ErrorSerializer.new(error, 404).serializable_hash, status: :not_found # 404
+    record_not_found(NoLoanUpdateException.new("Unable to update loan."))
   end
 
   def invalid_authentication
-    error = InvalidAuthenticationException.new("Invalid email or password.")
-    render json: ErrorSerializer.new(error, 401).serializable_hash, status: :unauthorized # 401
+    unauthorized(InvalidAuthenticationException.new("Invalid email or password."))
   end
 
   def missing_authentication
-    error = MissingAuthenticationException.new("Email and password are required.")
-    render json: ErrorSerializer.new(error, 401).serializable_hash, status: :unauthorized # 401
+    unauthorized(MissingAuthenticationException.new("Email and password are required."))
   end
-
-  def unauthorized
-    error = UnauthorizedException.new("Not Authorized.")
-    render json: ErrorSerializer.new(error, 401).serializable_hash, status: :unauthorized # 401
-  end
-
 end
 
 # Note to self: Saving this to remember process that lead me to final version:

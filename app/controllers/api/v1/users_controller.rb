@@ -13,10 +13,9 @@ class Api::V1::UsersController < ApplicationController
   def create
     new_user = User.new(user_params)
     new_user.format_attributes
-    if new_user.save
-      session[:user_id] = new_user.id
-      render json: UserSerializer.new(new_user), status: :created
-    end
+    return unless new_user.save
+    session[:user_id] = new_user.id
+    render json: UserSerializer.new(new_user), status: :created
   end
 
   private

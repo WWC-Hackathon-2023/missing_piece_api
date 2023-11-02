@@ -3,7 +3,6 @@ class Api::V1::PuzzlesController < ApplicationController
   before_action :find_puzzles, only: [:index]
 
   def index
-    # find_puzzles(params[:zip_code]) 
     raise NoPuzzlesFoundException if @puzzles_in_zip_code.empty?
     render json: PuzzleSerializer.new(@puzzles_in_zip_code)
   end

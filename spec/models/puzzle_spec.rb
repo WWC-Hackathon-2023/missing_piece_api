@@ -57,4 +57,19 @@ RSpec.describe Puzzle, type: :model do
       end
     end
   end
+
+  # Example scope test
+  # describe "scopes" do
+  #   it 'finds puzzles by zip code and excludes status 3' do
+  #     user = create(:user, zip_code: 10101)
+  #     create(:puzzle, user: user, status: 0)
+  #     create(:puzzle, user: user, status: 1)
+  #     create(:puzzle, user: user, status: 2)
+  #     create(:puzzle, user: user, status: 3) # Not returned
+
+  #     result = Puzzle.find_by_zip_code(10101)
+
+  #     expect(result.length).to eq(3)
+  #   end
+  # end
 end

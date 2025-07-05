@@ -90,7 +90,6 @@
 
 ![Ruby](https://img.shields.io/badge/Ruby-CC342D?style=for-the-badge&logo=ruby&logoColor=white) 
 ![Ruby on Rails](https://img.shields.io/badge/Ruby_on_Rails-CC0000?style=for-the-badge&logo=ruby-on-rails&logoColor=white) 
-<img src=".github/rspec_badge.jpg" alt="Rspec Badge" height="27">
 ![Postgresql](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 ![VScode](https://img.shields.io/badge/VS%20Code-007ACC.svg?style=for-the-badge&logo=Visual-Studio-Code&logoColor=white)
 ![Heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)
@@ -100,6 +99,7 @@
 ![Notion](https://img.shields.io/badge/Notion-EAEAEA.svg?style=for-the-badge&logo=Notion&logoColor=black)
 ![Miro](https://img.shields.io/badge/Miro-FFCD11.svg?style=for-the-badge&logo=Miro&logoColor=black)
 ![Figma](https://img.shields.io/badge/Figma-8669AE.svg?style=for-the-badge&logo=Figma&logoColor=white)
+<!-- <img src=".github/rspec_badge.jpg" alt="Rspec Badge" height="10"> -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
